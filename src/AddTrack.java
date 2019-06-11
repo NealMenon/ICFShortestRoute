@@ -9,6 +9,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JLabel;
 
 public class AddTrack {
 
@@ -16,8 +17,8 @@ public class AddTrack {
 	private JTextField startfield;
 	private JTextField endfield;
 	private JTextField distancefield;
-	String sstation,estation;
-	int distance;
+	String sstation,estation;//start station,end station
+	int distance;//track distance between them
 
 	/**
 	 * Launch the application.
@@ -47,72 +48,41 @@ public class AddTrack {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.getContentPane().setBackground(Color.BLUE);
+		//frame.getContentPane().setBackground(Color.BLUE);
 		frame.setBackground(Color.GREEN);
 		frame.setBounds(100, 100, 512, 330);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
 		JTextArea txtrAddTrackPage = new JTextArea();
-		txtrAddTrackPage.setBackground(Color.RED);
+		//txtrAddTrackPage.setBackground(Color.RED);
 		txtrAddTrackPage.setEditable(false);
 		txtrAddTrackPage.setText("Add Track Page");
 		txtrAddTrackPage.setBounds(212, 12, 95, 15);
 		frame.getContentPane().add(txtrAddTrackPage);
 		
-		JTextArea txtrStartStation = new JTextArea();
-		txtrStartStation.setBackground(Color.ORANGE);
-		txtrStartStation.setText("Start station");
-		txtrStartStation.setBounds(70, 68, 95, 15);
-		frame.getContentPane().add(txtrStartStation);
-		
 		startfield = new JTextField();
-		startfield.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				sstation=startfield.getText();
-			}
-		});
 		startfield.setBounds(241, 66, 211, 19);
 		frame.getContentPane().add(startfield);
 		startfield.setColumns(10);
 		
-		JTextArea txtrEndStation = new JTextArea();
-		txtrEndStation.setBackground(Color.ORANGE);
-		txtrEndStation.setText("End station");
-		txtrEndStation.setBounds(70, 125, 95, 15);
-		frame.getContentPane().add(txtrEndStation);
-		
 		endfield = new JTextField();
-		endfield.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				estation=endfield.getText();
-			}
-		});
 		endfield.setBounds(241, 123, 211, 19);
 		frame.getContentPane().add(endfield);
 		endfield.setColumns(10);
 		
-		JTextArea txtrDistance = new JTextArea();
-		txtrDistance.setBackground(Color.ORANGE);
-		txtrDistance.setText("Distance");
-		txtrDistance.setBounds(70, 171, 95, 15);
-		frame.getContentPane().add(txtrDistance);
-		
 		distancefield = new JTextField();
-		distancefield.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				distance=Integer.parseInt(distancefield.getText());
-			}
-		});
 		distancefield.setBounds(241, 169, 211, 19);
 		frame.getContentPane().add(distancefield);
 		distancefield.setColumns(10);
 		
 		JButton btnAddTrack = new JButton("Add Track");
-		btnAddTrack.addMouseListener(new MouseAdapter() {
+		btnAddTrack.addActionListener(new ActionListener() {
 			@Override
 			//to add data to database and refresh page
-			public void mouseClicked(MouseEvent e) {
+			public void actionPerformed(ActionEvent arg0) {
+				sstation=startfield.getText();estation=endfield.getText();
+				distance=Integer.parseInt(distancefield.getText());
 				System.out.println(sstation+" "+estation+" "+distance);
 			}
 		});
@@ -120,13 +90,26 @@ public class AddTrack {
 		frame.getContentPane().add(btnAddTrack);
 		
 		JButton btnBackToMain = new JButton("Back to Main Page");
-		btnBackToMain.addMouseListener(new MouseAdapter() {
+		btnBackToMain.addActionListener(new ActionListener() {
 			@Override
 			//button to go back to main page of website
-			public void mouseClicked(MouseEvent e) {
+			public void actionPerformed(ActionEvent arg0) {
+				System.out.println("Back");
 			}
 		});
 		btnBackToMain.setBounds(290, 227, 162, 25);
 		frame.getContentPane().add(btnBackToMain);
+		
+		JLabel lblStartStation = new JLabel("Start Station");
+		lblStartStation.setBounds(76, 68, 89, 15);
+		frame.getContentPane().add(lblStartStation);
+		
+		JLabel lblEndStation = new JLabel("End Station");
+		lblEndStation.setBounds(76, 125, 99, 15);
+		frame.getContentPane().add(lblEndStation);
+		
+		JLabel lblDistance = new JLabel("Distance");
+		lblDistance.setBounds(76, 171, 89, 15);
+		frame.getContentPane().add(lblDistance);
 	}
 }

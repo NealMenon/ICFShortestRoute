@@ -21,9 +21,10 @@ public class AddStation {
 	private JTextField namefield;
 	private JTextField codefield;
 	private JTextField zonefield;
-	private JTextArea txtrStationCode;
-	private JTextArea txtrStationZone;
 	String sname,scode,szone;
+	private JLabel lblStationName;
+	private JLabel lblStationCode;
+	private JLabel lblStationZone;
 
 	/**
 	 * Launch the application.
@@ -53,63 +54,47 @@ public class AddStation {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.getContentPane().setBackground(Color.BLUE);
+		//frame.getContentPane().setBackground(Color.LIGHT_GRAY);
 		
 		txtAddStationPage = new JTextField();
-		txtAddStationPage.setBackground(Color.RED);
+		//txtAddStationPage.setBackground(Color.RED);
 		txtAddStationPage.setEditable(false);
 		txtAddStationPage.setBounds(202, 12, 124, 19);
 		txtAddStationPage.setText("Add Station Page");
 		txtAddStationPage.setColumns(10);
 		
 		namefield = new JTextField();
-		namefield.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				sname=namefield.getText();
-			}
-		});
 		namefield.setBounds(234, 79, 269, 19);
 		frame.getContentPane().add(namefield);
 		namefield.setColumns(10);
 		
 		codefield = new JTextField();
-		codefield.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				scode=codefield.getText();
-			}
-		});
 		codefield.setBounds(234, 147, 269, 19);
 		frame.getContentPane().add(codefield);
 		codefield.setColumns(10);
 		
 		zonefield = new JTextField();
-		zonefield.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				szone=zonefield.getText();
-			}
-		});
 		zonefield.setColumns(10);
 		zonefield.setBounds(234, 215, 269, 19);
 		frame.getContentPane().add(zonefield);
 		
 		JButton btnadd = new JButton("Add Station");
-		btnadd.addMouseListener(new MouseAdapter() {
+		btnadd.addActionListener(new ActionListener() {
 			@Override
 			//for adding station and refreshing the page
-			public void mouseClicked(MouseEvent e) {
+			public void actionPerformed(ActionEvent arg0) {
+				sname=namefield.getText();scode=codefield.getText();szone=zonefield.getText();
 				System.out.println(sname+" "+scode+" "+szone);
 			}
 		});
 		btnadd.setBounds(101, 276, 138, 25);
 		
 		JButton btnhome = new JButton("Back to Home");
-		btnhome.addMouseListener(new MouseAdapter() {
+		btnhome.addActionListener(new ActionListener() {
 			@Override
 			//for going back to main page
-			public void mouseClicked(MouseEvent e) {
-				//jex1 run=new jex1();
-				//int a=25;
-				//run.fun(a);
+			public void actionPerformed(ActionEvent arg0) {
+				System.out.println("Back");
 			}
 		});
 		btnhome.setBounds(284, 276, 148, 25);
@@ -118,28 +103,19 @@ public class AddStation {
 		frame.getContentPane().add(btnadd);
 		frame.getContentPane().add(btnhome);
 		
-		JTextArea txtrStationName = new JTextArea();
-		txtrStationName.setEditable(false);
-		txtrStationName.setBackground(Color.ORANGE);
-		txtrStationName.setText("Station Name");
-		txtrStationName.setBounds(38, 81, 118, 15);
-		frame.getContentPane().add(txtrStationName);
+		lblStationName = new JLabel("Station Name");
+		lblStationName.setBounds(48, 81, 108, 15);
+		frame.getContentPane().add(lblStationName);
 		
-		txtrStationCode = new JTextArea();
-		txtrStationCode.setEditable(false);
-		txtrStationCode.setBackground(Color.ORANGE);
-		txtrStationCode.setText("Station Code");
-		txtrStationCode.setBounds(38, 149, 118, 15);
-		frame.getContentPane().add(txtrStationCode);
+		lblStationCode = new JLabel("Station code");
+		lblStationCode.setBounds(48, 149, 108, 15);
+		frame.getContentPane().add(lblStationCode);
 		
-		txtrStationZone = new JTextArea();
-		txtrStationZone.setEditable(false);
-		txtrStationZone.setBackground(Color.ORANGE);
-		txtrStationZone.setText("Station Zone");
-		txtrStationZone.setBounds(38, 217, 118, 15);
-		frame.getContentPane().add(txtrStationZone);
+		lblStationZone = new JLabel("Station Zone");
+		lblStationZone.setBounds(48, 217, 108, 15);
+		frame.getContentPane().add(lblStationZone);
 		
-		frame.setBackground(Color.GREEN);
+		//frame.setBackground(Color.GREEN);
 		frame.setBounds(100, 100, 531, 380);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
