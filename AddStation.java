@@ -107,9 +107,9 @@ public class AddStation {
 			@Override
 			//for going back to main page
 			public void mouseClicked(MouseEvent e) {
-				jex1 run=new jex1();
-				int a=25;
-				run.fun(a);
+				//jex1 run=new jex1();
+				//int a=25;
+				//run.fun(a);
 			}
 		});
 		btnhome.setBounds(284, 276, 148, 25);
