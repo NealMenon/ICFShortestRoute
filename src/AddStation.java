@@ -17,7 +17,6 @@ import java.awt.event.ActionEvent;
 public class AddStation {
 
 	private JFrame frame;
-	private JTextField txtAddStationPage;
 	private JTextField namefield;
 	private JTextField codefield;
 	private JTextField zonefield;
@@ -25,6 +24,7 @@ public class AddStation {
 	private JLabel lblStationName;
 	private JLabel lblStationCode;
 	private JLabel lblStationZone;
+	private JLabel lblAddStationPage;
 
 	/**
 	 * Launch the application.
@@ -54,14 +54,6 @@ public class AddStation {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		//frame.getContentPane().setBackground(Color.LIGHT_GRAY);
-		
-		txtAddStationPage = new JTextField();
-		//txtAddStationPage.setBackground(Color.RED);
-		txtAddStationPage.setEditable(false);
-		txtAddStationPage.setBounds(202, 12, 124, 19);
-		txtAddStationPage.setText("Add Station Page");
-		txtAddStationPage.setColumns(10);
 		
 		namefield = new JTextField();
 		namefield.setBounds(234, 79, 269, 19);
@@ -99,24 +91,27 @@ public class AddStation {
 		});
 		btnhome.setBounds(284, 276, 148, 25);
 		frame.getContentPane().setLayout(null);
-		frame.getContentPane().add(txtAddStationPage);
 		frame.getContentPane().add(btnadd);
 		frame.getContentPane().add(btnhome);
 		
 		lblStationName = new JLabel("Station Name");
-		lblStationName.setBounds(48, 81, 108, 15);
+		lblStationName.setBounds(100, 82, 108, 15);
 		frame.getContentPane().add(lblStationName);
 		
 		lblStationCode = new JLabel("Station code");
-		lblStationCode.setBounds(48, 149, 108, 15);
+		lblStationCode.setBounds(100, 150, 108, 15);
 		frame.getContentPane().add(lblStationCode);
 		
 		lblStationZone = new JLabel("Station Zone");
-		lblStationZone.setBounds(48, 217, 108, 15);
+		lblStationZone.setBounds(101, 218, 108, 15);
 		frame.getContentPane().add(lblStationZone);
 		
+		lblAddStationPage = new JLabel("Add Station Page");
+		lblAddStationPage.setBounds(198, 19, 114, 16);
+		frame.getContentPane().add(lblAddStationPage);
+		
 		//frame.setBackground(Color.GREEN);
-		frame.setBounds(100, 100, 531, 380);
+		frame.setBounds(100, 100, 565, 366);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 }
