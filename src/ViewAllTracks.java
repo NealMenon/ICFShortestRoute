@@ -3,10 +3,12 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class ViewAllTracks {
 
-	private JFrame frame;
+	public static JFrame frame;
 
 	/**
 	 * Launch the application.
@@ -41,6 +43,13 @@ public class ViewAllTracks {
 		frame.getContentPane().setLayout(null);
 		
 		JButton btnBack = new JButton("Back");
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//ApplicationPage applicationPageObj = new ApplicationPage();
+				frame.dispose();
+				ApplicationPage.frame.setVisible(true);
+			}
+		});
 		btnBack.setBounds(171, 209, 117, 29);
 		frame.getContentPane().add(btnBack);
 		

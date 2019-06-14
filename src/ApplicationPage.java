@@ -6,10 +6,12 @@ import javax.swing.JTextPane;
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class ApplicationPage {
 
-	private JFrame frame;
+	public static JFrame frame;
 	private JTextField textField;
 	private JTextField textField_1;
 	private JLabel lblDestinationStationCode;
@@ -93,18 +95,46 @@ public class ApplicationPage {
 		frame.getContentPane().add(btnFindJourneyLength);
 		
 		JButton btnAddNewStation = new JButton("Add new Station");
+		btnAddNewStation.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AddStation addStationObj = new AddStation();
+				frame.setVisible(false);
+				addStationObj.frame.setVisible(true);
+			}
+		});
 		btnAddNewStation.setBounds(44, 314, 151, 29);
 		frame.getContentPane().add(btnAddNewStation);
 		
 		JButton btnAddNewTrack = new JButton("Add new Track");
+		btnAddNewTrack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AddTrack addTrackObj = new AddTrack();
+				frame.setVisible(false);
+				addTrackObj.frame.setVisible(true);
+			}
+		});
 		btnAddNewTrack.setBounds(44, 355, 151, 29);
 		frame.getContentPane().add(btnAddNewTrack);
 		
 		JButton btnViewAllStation = new JButton("View all Stations");
+		btnViewAllStation.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ViewAllStations viewAllStationsObj = new ViewAllStations();
+				frame.setVisible(false);
+				viewAllStationsObj.frame.setVisible(true);
+			}
+		});
 		btnViewAllStation.setBounds(207, 314, 151, 29);
 		frame.getContentPane().add(btnViewAllStation);
 		
 		JButton btnViewAllTracks = new JButton("View all Tracks");
+		btnViewAllTracks.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ViewAllTracks viewAllTracksObj = new ViewAllTracks();
+				frame.setVisible(false);
+				viewAllTracksObj.frame.setVisible(true);
+			}
+		});
 		btnViewAllTracks.setBounds(207, 355, 151, 29);
 		frame.getContentPane().add(btnViewAllTracks);
 		

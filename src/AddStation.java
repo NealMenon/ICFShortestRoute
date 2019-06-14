@@ -16,7 +16,7 @@ import java.awt.event.ActionEvent;
 
 public class AddStation {
 
-	private JFrame frame;
+	public static JFrame frame;
 	private JTextField namefield;
 	private JTextField codefield;
 	private JTextField zonefield;
@@ -85,8 +85,13 @@ public class AddStation {
 		btnhome.addActionListener(new ActionListener() {
 			@Override
 			//for going back to main page
-			public void actionPerformed(ActionEvent arg0) {
-				System.out.println("Back");
+//			public void actionPerformed(ActionEvent arg0) {
+//				System.out.println("Back");
+//			}
+			public void actionPerformed(ActionEvent e) {
+				//ApplicationPage applicationPageObj = new ApplicationPage();
+				frame.dispose();
+				ApplicationPage.frame.setVisible(true);
 			}
 		});
 		btnhome.setBounds(284, 276, 148, 25);

@@ -4,14 +4,17 @@ import javax.swing.JFrame;
 import java.awt.FlowLayout;
 import javax.swing.JButton;
 import java.awt.CardLayout;
-import com.jgoodies.forms.layout.FormLayout;
+/*import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.RowSpec;
+import com.jgoodies.forms.layout.RowSpec;*/
 import javax.swing.JLabel;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.ActionEvent;
 
 public class ViewAllStations {
 
-	private JFrame frame;
+	public static JFrame frame;
 
 	/**
 	 * Launch the application.
@@ -46,6 +49,15 @@ public class ViewAllStations {
 		frame.getContentPane().setLayout(null);
 		
 		JButton btnBack = new JButton("Back");
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//ApplicationPage applicationPageObj = new ApplicationPage();
+				//frame.setVisible(false);
+				//frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
+				frame.dispose();
+				ApplicationPage.frame.setVisible(true);
+			}
+		});
 		btnBack.setBounds(160, 205, 117, 29);
 		frame.getContentPane().add(btnBack);
 		

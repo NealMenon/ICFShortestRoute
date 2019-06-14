@@ -10,7 +10,7 @@ import javax.swing.JLabel;
 
 public class JourneyPage {
 
-	private JFrame frame;
+	private static JFrame frame;
 
 	/**
 	 * Launch the application.
@@ -47,6 +47,9 @@ public class JourneyPage {
 		JButton btnBack = new JButton("Back");
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				//ApplicationPage applicationPageObj = new ApplicationPage();
+				frame.dispose();
+				ApplicationPage.frame.setVisible(true);
 			}
 		});
 		btnBack.setBounds(172, 215, 117, 29);

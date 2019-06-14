@@ -13,7 +13,7 @@ import javax.swing.JLabel;
 
 public class AddTrack {
 
-	private JFrame frame;
+	public static JFrame frame;
 	private JTextField startfield;
 	private JTextField endfield;
 	private JTextField distancefield;
@@ -93,8 +93,13 @@ public class AddTrack {
 		btnBackToMain.addActionListener(new ActionListener() {
 			@Override
 			//button to go back to main page of website
-			public void actionPerformed(ActionEvent arg0) {
-				System.out.println("Back");
+//			public void actionPerformed(ActionEvent arg0) {
+//				System.out.println("Back");
+//			}
+			public void actionPerformed(ActionEvent e) {
+//				applicationPageObj = new ApplicationPage();
+				frame.dispose();
+				ApplicationPage.frame.setVisible(true);
 			}
 		});
 		btnBackToMain.setBounds(290, 227, 162, 25);
