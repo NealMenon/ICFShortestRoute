@@ -91,6 +91,13 @@ public class ApplicationPage {
 		frame.getContentPane().add(lblTolerance);
 		
 		JButton btnFindJourneyLength = new JButton("Find Journey Length");
+		btnFindJourneyLength.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JourneyPage journeyObj = new JourneyPage();
+				frame.setVisible(false);
+				journeyObj.frame.setVisible(true);
+			}
+		});
 		btnFindJourneyLength.setBounds(371, 314, 151, 70);
 		frame.getContentPane().add(btnFindJourneyLength);
 		

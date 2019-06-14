@@ -10,7 +10,7 @@ import javax.swing.JLabel;
 
 public class JourneyPage {
 
-	private static JFrame frame;
+	public static JFrame frame;
 
 	/**
 	 * Launch the application.
