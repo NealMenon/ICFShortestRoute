@@ -89,16 +89,6 @@ public class ApplicationPage {
 		lblTolerance.setBounds(357, 93, 84, 16);
 		frame.getContentPane().add(lblTolerance);
 		
-		JButton btnFindJourneyLength = new JButton("Find Journey Length");
-		btnFindJourneyLength.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				JourneyPage journeyObj = new JourneyPage();
-				frame.setVisible(false);
-				journeyObj.frame.setVisible(true);
-			}
-		});
-		btnFindJourneyLength.setBounds(371, 314, 151, 70);
-		frame.getContentPane().add(btnFindJourneyLength);
 		
 		JButton btnAddNewStation = new JButton("Add new Station");
 		btnAddNewStation.addActionListener(new ActionListener() {
@@ -249,7 +239,50 @@ public class ApplicationPage {
 		frame.getContentPane().add(btnAdd);
 
 
-
+		JButton btnFindJourneyLength = new JButton("Find Journey Length");
+		btnFindJourneyLength.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+				    spinner.commitEdit();
+				} catch ( java.text.ParseException ex ) { System.out.println("Something went wrng heere\n"); }
+				int numBreakPoints = (Integer) spinner.getValue();
+				switch(numBreakPoints) {
+				case 0:
+					textField_3.setEditable(false);
+					textField_3.setText("");
+				case 1: 
+					textField_4.setEditable(false);
+					textField_4.setText("");
+				case 2:
+					textField_5.setEditable(false);
+					textField_5.setText("");
+				case 3:
+					textField_6.setEditable(false);
+					textField_6.setText("");
+				case 4: 
+					textField_7.setEditable(false);
+					textField_7.setText("");
+					break;
+				}
+				switch(numBreakPoints) {
+				case 5:
+					textField_7.setEditable(true);
+				case 4:
+					textField_6.setEditable(true);
+				case 3:
+					textField_5.setEditable(true);
+				case 2:
+					textField_4.setEditable(true);
+				case 1:
+					textField_3.setEditable(true);
+				}
+				JourneyPage journeyObj = new JourneyPage();
+				frame.setVisible(false);
+				journeyObj.frame.setVisible(true);
+			}
+		});
+		btnFindJourneyLength.setBounds(371, 314, 151, 70);
+		frame.getContentPane().add(btnFindJourneyLength);
 
 		
 		
