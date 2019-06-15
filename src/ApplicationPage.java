@@ -217,39 +217,15 @@ public class ApplicationPage {
 				case 0:
 					textField_3.setEditable(false);
 					textField_3.setText("");
-					textField_4.setEditable(false);
-					textField_4.setText("");
-					textField_5.setEditable(false);
-					textField_5.setText("");
-					textField_6.setEditable(false);
-					textField_6.setText("");
-					textField_7.setEditable(false);
-					textField_7.setText("");
-					break;
 				case 1: 
 					textField_4.setEditable(false);
 					textField_4.setText("");
-					textField_5.setEditable(false);
-					textField_5.setText("");
-					textField_6.setEditable(false);
-					textField_6.setText("");
-					textField_7.setEditable(false);
-					textField_7.setText("");
-					break;
 				case 2:
 					textField_5.setEditable(false);
 					textField_5.setText("");
-					textField_6.setEditable(false);
-					textField_6.setText("");
-					textField_7.setEditable(false);
-					textField_7.setText("");
-					break;
 				case 3:
 					textField_6.setEditable(false);
 					textField_6.setText("");
-					textField_7.setEditable(false);
-					textField_7.setText("");
-					break;
 				case 4: 
 					textField_7.setEditable(false);
 					textField_7.setText("");
