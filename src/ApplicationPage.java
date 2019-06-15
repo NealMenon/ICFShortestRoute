@@ -3,11 +3,14 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
+import javax.swing.SpinnerModel;
+import javax.swing.SpinnerNumberModel;
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JSpinner;
 
 public class ApplicationPage {
 
@@ -73,12 +76,8 @@ public class ApplicationPage {
 		lblDestinationStationCode.setBounds(302, 34, 168, 16);
 		frame.getContentPane().add(lblDestinationStationCode);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(270, 110, 52, 27);
-		frame.getContentPane().add(comboBox);
-		
 		JLabel lblNumberOfBreak = new JLabel("Number of Break points");
-		lblNumberOfBreak.setBounds(105, 114, 164, 16);
+		lblNumberOfBreak.setBounds(85, 114, 164, 16);
 		frame.getContentPane().add(lblNumberOfBreak);
 		
 		textField_2 = new JTextField();
@@ -145,31 +144,44 @@ public class ApplicationPage {
 		btnViewAllTracks.setBounds(207, 355, 151, 29);
 		frame.getContentPane().add(btnViewAllTracks);
 		
+		
+		SpinnerModel sm = new SpinnerNumberModel(0, 0, 5, 1); //default value,lower bound,upper bound,increment by
+		JSpinner spinner = new JSpinner(sm);
+		spinner.setBounds(243, 109, 41, 26);
+		frame.getContentPane().add(spinner);
+//		int numBreakPoints = (Integer) spinner.getValue();
+		
+		
 		textField_3 = new JTextField();
+		textField_3.setEditable(false);
 		textField_3.setBounds(105, 167, 130, 26);
 		frame.getContentPane().add(textField_3);
 		textField_3.setColumns(10);
 		
-		JLabel lblBreakStationCodes = new JLabel("Break Station Codes");
+		JLabel lblBreakStationCodes = new JLabel("Break Station Codes: ");
 		lblBreakStationCodes.setBounds(105, 149, 142, 16);
 		frame.getContentPane().add(lblBreakStationCodes);
 		
 		textField_4 = new JTextField();
+		textField_4.setEditable(false);
 		textField_4.setBounds(105, 199, 130, 26);
 		frame.getContentPane().add(textField_4);
 		textField_4.setColumns(10);
 		
 		textField_5 = new JTextField();
+		textField_5.setEditable(false);
 		textField_5.setBounds(105, 237, 130, 26);
 		frame.getContentPane().add(textField_5);
 		textField_5.setColumns(10);
 		
 		textField_6 = new JTextField();
+		textField_6.setEditable(false);
 		textField_6.setBounds(279, 167, 130, 26);
 		frame.getContentPane().add(textField_6);
 		textField_6.setColumns(10);
 		
 		textField_7 = new JTextField();
+		textField_7.setEditable(false);
 		textField_7.setBounds(279, 199, 130, 26);
 		frame.getContentPane().add(textField_7);
 		textField_7.setColumns(10);
@@ -193,6 +205,76 @@ public class ApplicationPage {
 		JLabel label_4 = new JLabel("5:");
 		label_4.setBounds(261, 204, 61, 16);
 		frame.getContentPane().add(label_4);
+		
+		JButton btnAdd = new JButton("Add");
+		btnAdd.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+				    spinner.commitEdit();
+				} catch ( java.text.ParseException ex ) { System.out.println("Something went wrng heere\n"); }
+				int numBreakPoints = (Integer) spinner.getValue();
+				switch(numBreakPoints) {
+				case 0:
+					textField_3.setEditable(false);
+					textField_3.setText("");
+					textField_4.setEditable(false);
+					textField_4.setText("");
+					textField_5.setEditable(false);
+					textField_5.setText("");
+					textField_6.setEditable(false);
+					textField_6.setText("");
+					textField_7.setEditable(false);
+					textField_7.setText("");
+					break;
+				case 1: 
+					textField_4.setEditable(false);
+					textField_4.setText("");
+					textField_5.setEditable(false);
+					textField_5.setText("");
+					textField_6.setEditable(false);
+					textField_6.setText("");
+					textField_7.setEditable(false);
+					textField_7.setText("");
+					break;
+				case 2:
+					textField_5.setEditable(false);
+					textField_5.setText("");
+					textField_6.setEditable(false);
+					textField_6.setText("");
+					textField_7.setEditable(false);
+					textField_7.setText("");
+					break;
+				case 3:
+					textField_6.setEditable(false);
+					textField_6.setText("");
+					textField_7.setEditable(false);
+					textField_7.setText("");
+					break;
+				case 4: 
+					textField_7.setEditable(false);
+					textField_7.setText("");
+					break;
+				}
+				switch(numBreakPoints) {
+				case 5:
+					textField_7.setEditable(true);
+				case 4:
+					textField_6.setEditable(true);
+				case 3:
+					textField_5.setEditable(true);
+				case 2:
+					textField_4.setEditable(true);
+				case 1:
+					textField_3.setEditable(true);
+				}
+			}
+		});
+		btnAdd.setBounds(276, 110, 56, 26);
+		frame.getContentPane().add(btnAdd);
+
+
+
+
 		
 		
 	}
