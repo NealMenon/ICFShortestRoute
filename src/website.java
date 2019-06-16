@@ -50,15 +50,65 @@ public class website
 class Application extends website
 {
 	String src,dest;
-	int t;//tolerance
-	String []bp=new String[5];
-	Application(String src,String dest,int t,String[] bp)
+	int t,nbp;//t->tolerance nbp->number of breakpoints
+	Application(String src,String dest,int t,int nbp)
 	{
 		this.src=src;
 		this.dest=dest;
 		this.t=t;
+		this.nbp=nbp;
+	}
+	String[] bp=new String[nbp];
+	Application(String[] bp)
+	{
 		this.bp=bp;
 	}
+	ViewS run=new ViewS();
+	int v=run.countStation();
+	double[][] graph=new double[v][v];
+	void matrix()
+	{
+		for(double[] row:graph)
+			Arrays.fill(row,0.0);
+		try
+		{
+			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/project1?autoReconnect=true&useSSL=false",user,pwd);
+			Statement q=con.createStatement();
+			String query1="SELECT * FROM track";
+			ResultSet result1=q.executeQuery(query1);
+			while(result1.next())
+			{
+				String a=result1.getString("src");
+				String b=result1.getString("dest");
+				String query2="SELECT * FROM station WHERE scode='"+a+"'";
+				String query3="SELECT * FROM station WHERE scode='"+b+"'";
+				ResultSet result2=q.executeQuery(query2);
+				ResultSet result3=q.executeQuery(query3);
+				if(result2.next() && result3.next())
+				{
+					int i=result2.getInt("sno");
+					int j=result3.getInt("sno");
+					double d=result1.getDouble("distance");
+					if(i>v)
+						i=i-(i%v);
+					if(j>v)
+						j=j-(j%v);
+					graph[i][j]=d;
+				}
+			}
+		}
+		catch(Exception e)
+		{
+			System.out.println(e);
+		}
+		for(int i=0;i<v;i++)
+		{
+			for(int j=0;j<v;j++)
+				System.out.println(graph[i][j]);
+		}
+		System.out.println("B");
+	}
+
 	void journey()
 	{
 		if(t==0)
@@ -130,64 +180,147 @@ class AddT extends website
 /*This class is linked to the ViewAllStations page of frontend.This class outputs all the stations present in table "station" in database project1*/
 class ViewS extends website
 {
-	String[] view()
+	int n=0;
+	int countStation()
 	{
-		int n=0;
-		String[] sd=new String[n];
 		try
 		{
 			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/project1?autoReconnect=true&useSSL=false",user,pwd);
 			Statement q=con.createStatement();
-			String query1="SELECT * FROM station";
-			String query2="SELECT COUNT(*) FROM station";
+			String query1="INSERT COUNT(*) FROM station";
 			ResultSet result1=q.executeQuery(query1);
-			ResultSet result2=q.executeQuery(query2);
-			while(result2.next())
-				n=result2.getInt(1);
-			sd=new String[n];//sd=station details
-			int i=0;
-			while(result1.next())
-			{
-				String sname=result1.getString("sname");
-				String scode=result1.getString("scode");
-				String szone=result1.getString("szone");
-				sd[i]=sname;
-				sd[i+1]=scode;
-				sd[i+2]=szone;
-				i+=3;
-			}
+			if(result1.next())
+				n=result1.getInt(1);
 		}
 		catch(Exception e)
-			{System.out.println("No stations available");}
-
-		return sd;
+		{
+			System.out.println(e);
+		}
+		int a=n;
+		return a;
 	}
+//	String[] view()
+//	{
+//		String[] sd=new String[n];
+//		try
+//		{
+//			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/project1?autoReconnect=true&useSSL=false",user,pwd);
+//			Statement q=con.createStatement();
+//			String query1="SELECT * FROM station";
+//			ResultSet result1=q.executeQuery(query1);
+//			int i=0;
+//			while(result1.next())
+//			{
+//				String sname=result1.getString("sname");
+//				String scode=result1.getString("scode");
+//				String szone=result1.getString("szone");
+//				sd[i]=sname;
+//				sd[i+1]=scode;
+//				sd[i+2]=szone;
+//				i+=3;
+//			}
+//		}
+//		catch(Exception e)
+//			{System.out.println("No stations available");}
+//
+//		return sd;
+//	}
+	String[][] view()
+
+		{
+
+			String[][] sd=new String[n][3];
+
+			try
+
+			{
+
+				Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/project1?autoReconnect=true&useSSL=false",user,pwd);
+
+				Statement q=con.createStatement();
+
+				String query1="SELECT * FROM stations";
+
+				ResultSet result1=q.executeQuery(query1);
+
+				int i=0; //j = 0;
+
+				while(result1.next())
+
+				{
+
+					
+
+					String sname=result1.getString("sname");
+
+					String scode = result1.getString("scode");	
+
+					String szone=result1.getString("szone");
+
+					
+
+					sd[i][0]=sname;
+
+					sd[i][1]=scode;
+
+					sd[i][3]=szone;
+
+					
+
+					i++;
+
+				}
+
+			}
+
+			catch(Exception e)
+
+				{System.out.println("No stations available");}
+
+
+
+			return sd;
+
+		}
 }
 
 /*This class is linked to ViewAllTracks page of frontend.This class outputs all the tracks present in table "track" in the database project1*/
 class ViewT extends website
 {
+	int n=0;
+	int countTrack()
+	{
+		try
+		{
+			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/project1?autoReconnect=true&useSSL=false",user,pwd);
+			Statement q=con.createStatement();
+			String query1="SELECT COUNT(*) FROM track";
+			ResultSet result1=q.executeQuery(query1);
+			if(result1.next())
+				n=result1.getInt(1);
+		}
+		catch(Exception e)
+		{
+			System.out.println(e);
+		}
+		int a=n;
+		return a;
+	}
 	String[] view()
 	{
-		int n=0;
 		String[] td=new String[n];
 		try
 		{
 			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/project1?autoReconnect=true&useSSL=false",user,pwd);
 			Statement q=con.createStatement();
 			String query1="SELECT * FROM track";
-			String query2="SELECT COUNT(*) FROM track";
 			ResultSet result1=q.executeQuery(query1);
-			ResultSet result2=q.executeQuery(query2);
-			while(result2.next())
-				n=result2.getInt(1);
-			td=new String[n];//td->track details
 			int i=0;
 			while(result1.next())
 			{
 				String src=result1.getString("src");
-				String dest=result2.getString("dest");
-				String d=String.valueOf(result2.getDouble("distance"));
+				String dest=result1.getString("dest");
+				String d=String.valueOf(result1.getDouble("distance"));
 				td[i]=src;
 				td[i+1]=dest;
 				td[i+2]=d;
