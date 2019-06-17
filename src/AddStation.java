@@ -76,7 +76,8 @@ public class AddStation {
 			//for adding station and refreshing the page
 			public void actionPerformed(ActionEvent arg0) {
 				sname=namefield.getText();scode=codefield.getText();szone=zonefield.getText();
-				System.out.println(sname+" "+scode+" "+szone);
+				AddS adds=new AddS(sname,scode,szone);
+				adds.add();
 			}
 		});
 		btnadd.setBounds(101, 276, 138, 25);

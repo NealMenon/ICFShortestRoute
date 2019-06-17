@@ -291,6 +291,7 @@ public class ApplicationPage {
 				frame.setVisible(false);
 				journeyObj.frame.setVisible(true);
 				Application app=new Application(src,dest,t,numBreakPoints,bp);
+				app.journey();
 			}
 		});
 		btnFindJourneyLength.setBounds(371, 314, 151, 70);

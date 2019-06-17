@@ -18,7 +18,7 @@ public class AddTrack {
 	private JTextField endfield;
 	private JTextField distancefield;
 	String sstation,estation;//start station,end station
-	int distance;//track distance between them
+	double distance;//track distance between them
 
 	/**
 	 * Launch the application.
@@ -82,8 +82,9 @@ public class AddTrack {
 			//to add data to database and refresh page
 			public void actionPerformed(ActionEvent arg0) {
 				sstation=startfield.getText();estation=endfield.getText();
-				distance=Integer.parseInt(distancefield.getText());
-				System.out.println(sstation+" "+estation+" "+distance);
+				distance=Double.parseDouble(distancefield.getText());
+				AddT addt=new AddT(sstation,estation,distance);
+				addt.add();
 			}
 		});
 		btnAddTrack.setBounds(93, 227, 114, 25);

@@ -71,48 +71,106 @@ class Application extends website
 		{
 			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/project1?autoReconnect=true&useSSL=false",user,pwd);
 			Statement q=con.createStatement();
+			Statement q1=con.createStatement();
+			Statement q2=con.createStatement();
+			Statement q3=con.createStatement();
 			String query1="SELECT * FROM track";
+			String query2="SELECT MIN(sno) AS min FROM station";
 			ResultSet result1=q.executeQuery(query1);
+			ResultSet result2=q1.executeQuery(query2);
+			int min=0;
+			if(result2.next())
+				min=result2.getInt(1);
 			while(result1.next())
 			{
 				String a=result1.getString("src");
 				String b=result1.getString("dest");
-				String query2="SELECT * FROM station WHERE scode='"+a+"'";
-				String query3="SELECT * FROM station WHERE scode='"+b+"'";
-				ResultSet result2=q.executeQuery(query2);
-				ResultSet result3=q.executeQuery(query3);
-				if(result2.next() && result3.next())
+				String query3="SELECT * FROM station WHERE scode='"+a+"'";
+				String query4="SELECT * FROM station WHERE scode='"+b+"'";
+				ResultSet result3=q2.executeQuery(query3);
+				ResultSet result4=q3.executeQuery(query4);
+				if(result3.next() && result4.next())
 				{
-					int i=result2.getInt("sno");
-					int j=result3.getInt("sno");
+					int i=result3.getInt("sno");
+					int j=result4.getInt("sno");
 					double d=result1.getDouble("distance");
 					if(i>v)
-						i=i-(i%v);
+						i=i-min;
 					if(j>v)
-						j=j-(j%v);
+						j=j-min;
 					graph[i][j]=d;
+					graph[j][i]=d;
 				}
 			}
 		}
 		catch(Exception e)
 		{
-			System.out.println(e);
+			e.printStackTrace();
 		}
 	}
 
 	void journey()
 	{
-		if(t==0)
-			t=10;
+		matrix();
+		double[] dist=new double[v];
+		boolean[] added=new boolean[v];
+		Arrays.fill(added,false);
+		Arrays.fill(dist,Double.MAX_VALUE);
+		int root=0,leaf=0;
 		try
 		{
 			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/project1?autoReconnect=true&useSSL=false",user,pwd);
-			Statement q=con.createStatement();
+			Statement q1=con.createStatement();
+			Statement q2=con.createStatement();
+			String query1="SELECT sno FROM station WHERE scode='"+src+"'";
+			String query2="SELECT sno FROM station WHERE scode='"+dest+"'";
+			ResultSet result1=q1.executeQuery(query1);
+			ResultSet result2=q2.executeQuery(query2);
+			root=result1.getInt("sno");
+			leaf=result2.getInt("sno");
 		}
 		catch(Exception e)
 		{
-			System.out.println("Cannot find journey.Please check station details");
+			e.printStackTrace();
 		}
+		dist[root]=0.0;
+		int[] parents=new int[v];
+		parents[root]=-1;
+
+
+		for(int i=0;i<v;i++)
+		{
+			int nv=-1;
+			double sd=Double.MAX_VALUE;
+			for(int vi=0;vi<v;vi++)
+			{
+				if(!added[vi] && dist[vi]<sd)
+				{
+					nv=vi;
+					sd=dist[vi];
+				}
+			}
+			added[nv]=true;
+			for(int vi=0;vi<v;vi++)
+			{
+				double distance=graph[nv][vi];
+				if(distance>0 && ((sd+distance)<dist[vi]))
+				{
+					parents[vi]=nv;
+					dist[vi]=sd+distance;
+				}
+			}
+			printsolution(nv,parents);
+		}
+	}
+	void printsolution(int cv,int[] parents)
+	{
+		if(cv==-1)
+		{
+			return;
+		}
+		printsolution(parents[cv],parents);
+		System.out.println(cv+" ");
 	}
 }
 
@@ -132,13 +190,13 @@ class AddS extends website
 		{
 			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/project1?autoReconnect=true&useSSL=false",user,pwd);
 			Statement q=con.createStatement();
-			String query1="INSERT INTO station VALUES ('"+sname+"','"+scode+"','"+szone+"')";
+			String query1="INSERT INTO station(sname,scode,szone) VALUES ('"+sname+"','"+scode+"','"+szone+"')";
 			q.executeUpdate(query1);
 			System.out.println("Successfully added to database");
 		}
 		catch(Exception e)
 		{
-			System.out.println("Cannot add station.Please check station details.");
+			System.out.println(e);
 		}
 	}
 }
@@ -160,10 +218,12 @@ class AddT extends website
 			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/project1?autoReconnect=true&useSSL=false",user,pwd);
 			Statement q=con.createStatement();
 			String query1="INSERT INTO track VALUES ('"+src+"','"+dest+"','"+distance+"')";
+			q.executeUpdate(query1);
+			System.out.println("Successfully added to database");
 		}
 		catch(Exception e)
 		{
-			System.out.println("Cannot add track.Please check track details");
+			System.out.println(e);
 		}
 	}
 }
@@ -178,7 +238,7 @@ class ViewS extends website
 		{
 			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/project1?autoReconnect=true&useSSL=false",user,pwd);
 			Statement q=con.createStatement();
-			String query1="INSERT COUNT(*) FROM station";
+			String query1="SELECT COUNT(*) FROM station";
 			ResultSet result1=q.executeQuery(query1);
 			if(result1.next())
 				n=result1.getInt(1);
@@ -197,39 +257,23 @@ class ViewS extends website
 			{
 				Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/project1?autoReconnect=true&useSSL=false",user,pwd);
 				Statement q=con.createStatement();
-				String query1="SELECT * FROM stations";
+				String query1="SELECT * FROM station";
 				ResultSet result1=q.executeQuery(query1);
 				int i=0; //j = 0;
 				while(result1.next())
 				{
-<<<<<<< HEAD
 					String sname=result1.getString("sname");
 					String scode = result1.getString("scode");	
 					String szone=result1.getString("szone");
 					sd[i][0]=sname;
 					sd[i][1]=scode;
-					sd[i][3]=szone;
-=======
-
-					String sname=result1.getString("sname");
-					String scode = result1.getString("scode");	
-					String szone=result1.getString("szone");
-
-					sd[i][0]=sname;
-					sd[i][1]=scode;
-					sd[i][3]=szone;
-
->>>>>>> ca87933794fdbf48c468d4a34be777048dcedf7e
+					sd[i][2]=szone;
 					i++;
 				}
 			}
 			catch(Exception e)
 				{
-<<<<<<< HEAD
 					System.out.println("No stations available");
-=======
-				System.out.println("No stations available");
->>>>>>> ca87933794fdbf48c468d4a34be777048dcedf7e
 				}
 			return sd;
 		}

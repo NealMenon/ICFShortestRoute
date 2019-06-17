@@ -56,13 +56,14 @@ public class ViewAllStations {
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-		
-		String data[][];
-		    data= vstat;    
+		for(int i=0;i<n;i++)
+		{
+			System.out.println(vstat[i][0]+" "+vstat[i][1]+" "+vstat[i][2]);
+		}    
 
 		String column[]={"name","code", "zone"};         
 
-		JTable jt=new JTable(data,column);    
+		JTable jt=new JTable(vstat,column);    
 		jt.setBounds(30,40,200,300);          
 		JScrollPane sp=new JScrollPane(jt);    
 		    
