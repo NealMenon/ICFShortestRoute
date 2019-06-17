@@ -15,16 +15,18 @@ import javax.swing.JSpinner;
 public class ApplicationPage {
 
 	public static JFrame frame;
-	private JTextField textField;
-	private JTextField textField_1;
+	private JTextField sourcefield;
+	private JTextField destfield;
 	private JLabel lblDestinationStationCode;
-	private JTextField textField_2;
+	private JTextField tolerance;
 	private JLabel lblTolerance;
-	private JTextField textField_3;
-	private JTextField textField_4;
-	private JTextField textField_5;
-	private JTextField textField_6;
-	private JTextField textField_7;
+	private JTextField breakpoint1;
+	private JTextField breakpoint2;
+	private JTextField breakpoint3;
+	private JTextField breakpoint4;
+	private JTextField breakpoint5;
+	String src,dest;
+	int t;
 
 	/**
 	 * Launch the application.
@@ -58,15 +60,15 @@ public class ApplicationPage {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		textField = new JTextField();
-		textField.setBounds(105, 55, 185, 26);
-		frame.getContentPane().add(textField);
-		textField.setColumns(10);
+		sourcefield = new JTextField();
+		sourcefield.setBounds(105, 55, 185, 26);
+		frame.getContentPane().add(sourcefield);
+		sourcefield.setColumns(10);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(302, 55, 185, 26);
-		frame.getContentPane().add(textField_1);
+		destfield = new JTextField();
+		destfield.setColumns(10);
+		destfield.setBounds(302, 55, 185, 26);
+		frame.getContentPane().add(destfield);
 		
 		JLabel lblSourceStationCode = new JLabel("Source Station Code");
 		lblSourceStationCode.setBounds(105, 34, 126, 16);
@@ -80,10 +82,10 @@ public class ApplicationPage {
 		lblNumberOfBreak.setBounds(85, 114, 164, 16);
 		frame.getContentPane().add(lblNumberOfBreak);
 		
-		textField_2 = new JTextField();
-		textField_2.setBounds(357, 109, 130, 26);
-		frame.getContentPane().add(textField_2);
-		textField_2.setColumns(10);
+		tolerance = new JTextField();
+		tolerance.setBounds(357, 109, 130, 26);
+		frame.getContentPane().add(tolerance);
+		tolerance.setColumns(10);
 		
 		lblTolerance = new JLabel("Tolerance");
 		lblTolerance.setBounds(357, 93, 84, 16);
@@ -142,39 +144,39 @@ public class ApplicationPage {
 //		int numBreakPoints = (Integer) spinner.getValue();
 		
 		
-		textField_3 = new JTextField();
-		textField_3.setEditable(false);
-		textField_3.setBounds(105, 167, 130, 26);
-		frame.getContentPane().add(textField_3);
-		textField_3.setColumns(10);
+		breakpoint1 = new JTextField();
+		breakpoint1.setEditable(false);
+		breakpoint1.setBounds(105, 167, 130, 26);
+		frame.getContentPane().add(breakpoint1);
+		breakpoint1.setColumns(10);
 		
 		JLabel lblBreakStationCodes = new JLabel("Break Station Codes: ");
 		lblBreakStationCodes.setBounds(105, 149, 142, 16);
 		frame.getContentPane().add(lblBreakStationCodes);
 		
-		textField_4 = new JTextField();
-		textField_4.setEditable(false);
-		textField_4.setBounds(105, 199, 130, 26);
-		frame.getContentPane().add(textField_4);
-		textField_4.setColumns(10);
+		breakpoint2 = new JTextField();
+		breakpoint2.setEditable(false);
+		breakpoint2.setBounds(105, 199, 130, 26);
+		frame.getContentPane().add(breakpoint2);
+		breakpoint2.setColumns(10);
 		
-		textField_5 = new JTextField();
-		textField_5.setEditable(false);
-		textField_5.setBounds(105, 237, 130, 26);
-		frame.getContentPane().add(textField_5);
-		textField_5.setColumns(10);
+		breakpoint3 = new JTextField();
+		breakpoint3.setEditable(false);
+		breakpoint3.setBounds(105, 237, 130, 26);
+		frame.getContentPane().add(breakpoint3);
+		breakpoint3.setColumns(10);
 		
-		textField_6 = new JTextField();
-		textField_6.setEditable(false);
-		textField_6.setBounds(279, 167, 130, 26);
-		frame.getContentPane().add(textField_6);
-		textField_6.setColumns(10);
+		breakpoint4 = new JTextField();
+		breakpoint4.setEditable(false);
+		breakpoint4.setBounds(279, 167, 130, 26);
+		frame.getContentPane().add(breakpoint4);
+		breakpoint4.setColumns(10);
 		
-		textField_7 = new JTextField();
-		textField_7.setEditable(false);
-		textField_7.setBounds(279, 199, 130, 26);
-		frame.getContentPane().add(textField_7);
-		textField_7.setColumns(10);
+		breakpoint5 = new JTextField();
+		breakpoint5.setEditable(false);
+		breakpoint5.setBounds(279, 199, 130, 26);
+		frame.getContentPane().add(breakpoint5);
+		breakpoint5.setColumns(10);
 		
 		JLabel label = new JLabel("1:");
 		label.setBounds(90, 172, 61, 16);
@@ -205,33 +207,33 @@ public class ApplicationPage {
 				int numBreakPoints = (Integer) spinner.getValue();
 				switch(numBreakPoints) {
 				case 0:
-					textField_3.setEditable(false);
-					textField_3.setText("");
+					breakpoint1.setEditable(false);
+					breakpoint1.setText("");
 				case 1: 
-					textField_4.setEditable(false);
-					textField_4.setText("");
+					breakpoint2.setEditable(false);
+					breakpoint2.setText("");
 				case 2:
-					textField_5.setEditable(false);
-					textField_5.setText("");
+					breakpoint3.setEditable(false);
+					breakpoint3.setText("");
 				case 3:
-					textField_6.setEditable(false);
-					textField_6.setText("");
+					breakpoint4.setEditable(false);
+					breakpoint4.setText("");
 				case 4: 
-					textField_7.setEditable(false);
-					textField_7.setText("");
+					breakpoint5.setEditable(false);
+					breakpoint5.setText("");
 					break;
 				}
 				switch(numBreakPoints) {
 				case 5:
-					textField_7.setEditable(true);
+					breakpoint5.setEditable(true);
 				case 4:
-					textField_6.setEditable(true);
+					breakpoint4.setEditable(true);
 				case 3:
-					textField_5.setEditable(true);
+					breakpoint3.setEditable(true);
 				case 2:
-					textField_4.setEditable(true);
+					breakpoint2.setEditable(true);
 				case 1:
-					textField_3.setEditable(true);
+					breakpoint1.setEditable(true);
 				}
 			}
 		});
@@ -239,46 +241,56 @@ public class ApplicationPage {
 		frame.getContentPane().add(btnAdd);
 
 
-		JButton btnFindJourneyLength = new JButton("Find Journey Length");
+		JButton btnFindJourneyLength = new JButton("Find Journey Length");//Journey Page
 		btnFindJourneyLength.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 				    spinner.commitEdit();
 				} catch ( java.text.ParseException ex ) { System.out.println("Something went wrng heere\n"); }
 				int numBreakPoints = (Integer) spinner.getValue();
+				String[] bp=new String[numBreakPoints];
 				switch(numBreakPoints) {
 				case 0:
-					textField_3.setEditable(false);
-					textField_3.setText("");
+					breakpoint1.setEditable(false);
+					breakpoint1.setText("");
 				case 1: 
-					textField_4.setEditable(false);
-					textField_4.setText("");
+					breakpoint2.setEditable(false);
+					breakpoint2.setText("");
 				case 2:
-					textField_5.setEditable(false);
-					textField_5.setText("");
+					breakpoint3.setEditable(false);
+					breakpoint3.setText("");
 				case 3:
-					textField_6.setEditable(false);
-					textField_6.setText("");
+					breakpoint4.setEditable(false);
+					breakpoint4.setText("");
 				case 4: 
-					textField_7.setEditable(false);
-					textField_7.setText("");
+					breakpoint5.setEditable(false);
+					breakpoint5.setText("");
 					break;
 				}
 				switch(numBreakPoints) {
 				case 5:
-					textField_7.setEditable(true);
+					breakpoint5.setEditable(true);
+					bp[4]=breakpoint5.getText();
 				case 4:
-					textField_6.setEditable(true);
+					breakpoint4.setEditable(true);
+					bp[3]=breakpoint4.getText();
 				case 3:
-					textField_5.setEditable(true);
+					breakpoint3.setEditable(true);
+					bp[2]=breakpoint3.getText();
 				case 2:
-					textField_4.setEditable(true);
+					breakpoint2.setEditable(true);
+					bp[1]=breakpoint2.getText();
 				case 1:
-					textField_3.setEditable(true);
+					breakpoint1.setEditable(true);
+					bp[0]=breakpoint1.getText();
 				}
+				t=Integer.parseInt(tolerance.getText());
+				dest=destfield.getText();
+				src=sourcefield.getText();
 				JourneyPage journeyObj = new JourneyPage();
 				frame.setVisible(false);
 				journeyObj.frame.setVisible(true);
+				Application app=new Application(src,dest,t,numBreakPoints,bp);
 			}
 		});
 		btnFindJourneyLength.setBounds(371, 314, 151, 70);

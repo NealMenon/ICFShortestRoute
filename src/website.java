@@ -51,16 +51,13 @@ class Application extends website
 {
 	String src,dest;
 	int t,nbp;//t->tolerance nbp->number of breakpoints
-	Application(String src,String dest,int t,int nbp)
+	String[] bp=new String[nbp];
+	Application(String src,String dest,int t,int nbp,String[] bp)
 	{
 		this.src=src;
 		this.dest=dest;
 		this.t=t;
 		this.nbp=nbp;
-	}
-	String[] bp=new String[nbp];
-	Application(String[] bp)
-	{
 		this.bp=bp;
 	}
 	ViewS run=new ViewS();
@@ -101,12 +98,6 @@ class Application extends website
 		{
 			System.out.println(e);
 		}
-		for(int i=0;i<v;i++)
-		{
-			for(int j=0;j<v;j++)
-				System.out.println(graph[i][j]);
-		}
-		System.out.println("B");
 	}
 
 	void journey()
@@ -199,88 +190,32 @@ class ViewS extends website
 		int a=n;
 		return a;
 	}
-//	String[] view()
-//	{
-//		String[] sd=new String[n];
-//		try
-//		{
-//			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/project1?autoReconnect=true&useSSL=false",user,pwd);
-//			Statement q=con.createStatement();
-//			String query1="SELECT * FROM station";
-//			ResultSet result1=q.executeQuery(query1);
-//			int i=0;
-//			while(result1.next())
-//			{
-//				String sname=result1.getString("sname");
-//				String scode=result1.getString("scode");
-//				String szone=result1.getString("szone");
-//				sd[i]=sname;
-//				sd[i+1]=scode;
-//				sd[i+2]=szone;
-//				i+=3;
-//			}
-//		}
-//		catch(Exception e)
-//			{System.out.println("No stations available");}
-//
-//		return sd;
-//	}
 	String[][] view()
-
 		{
-
 			String[][] sd=new String[n][3];
-
 			try
-
 			{
-
 				Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/project1?autoReconnect=true&useSSL=false",user,pwd);
-
 				Statement q=con.createStatement();
-
 				String query1="SELECT * FROM stations";
-
 				ResultSet result1=q.executeQuery(query1);
-
 				int i=0; //j = 0;
-
 				while(result1.next())
-
 				{
-
-					
-
 					String sname=result1.getString("sname");
-
 					String scode = result1.getString("scode");	
-
 					String szone=result1.getString("szone");
-
-					
-
 					sd[i][0]=sname;
-
 					sd[i][1]=scode;
-
 					sd[i][3]=szone;
-
-					
-
 					i++;
-
 				}
-
 			}
-
 			catch(Exception e)
-
-				{System.out.println("No stations available");}
-
-
-
+				{
+					System.out.println("No stations available");
+				}
 			return sd;
-
 		}
 }
 
