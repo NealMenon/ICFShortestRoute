@@ -3,6 +3,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -37,10 +40,29 @@ public class ViewAllTracks {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		ViewT vwT = new ViewT();
+		int n =vwT.countTrack();
+		
+		String[][] vtrack = new String [n][3];
+		vtrack = vwT.view();
+		
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+		
+		String data[][];
+	    data= vtrack;
+	    
+	    String column[]={"Source","Destination", "Distance"};         
+
+		JTable jt=new JTable(data,column);    
+		jt.setBounds(30,40,200,300);          
+		JScrollPane sp=new JScrollPane(jt);    
+		    
+		frame.add(sp);          	    
+		frame.setSize(300,400);    		    
+		frame.setVisible(true);
 		
 		JButton btnBack = new JButton("Back");
 		btnBack.addActionListener(new ActionListener() {

@@ -11,6 +11,7 @@ import javax.swing.JLabel;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.ActionEvent;
+import javax.swing.*;
 
 public class ViewAllStations {
 
@@ -43,10 +44,33 @@ public class ViewAllStations {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		
+		
+		ViewS vw = new ViewS();
+		int n =vw.countStation();
+		
+		String[][] vstat = new String [n][3];
+		vstat = vw.view();
+		
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+		
+		String data[][];
+		    data= vstat;    
+
+		String column[]={"name","code", "zone"};         
+
+		JTable jt=new JTable(data,column);    
+		jt.setBounds(30,40,200,300);          
+		JScrollPane sp=new JScrollPane(jt);    
+		    
+		frame.add(sp);          	    
+		frame.setSize(300,400);    		    
+		frame.setVisible(true);
+		
+		
 		
 		JButton btnBack = new JButton("Back");
 		btnBack.addActionListener(new ActionListener() {
@@ -58,8 +82,12 @@ public class ViewAllStations {
 				ApplicationPage.frame.setVisible(true);
 			}
 		});
+		
+		
 		btnBack.setBounds(160, 205, 117, 29);
 		frame.getContentPane().add(btnBack);
+		
+		
 		
 		JLabel lblAllTheStations = new JLabel("All The Stations in the Network are as follows");
 		lblAllTheStations.setBounds(81, 24, 306, 16);
