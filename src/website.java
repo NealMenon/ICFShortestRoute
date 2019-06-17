@@ -60,9 +60,12 @@ class Application extends website
 		this.nbp=nbp;
 		this.bp=bp;
 	}
+
+
 	ViewS run=new ViewS();
 	int v=run.countStation();
 	double[][] graph=new double[v][v];
+	int min=0;
 	void matrix()
 	{
 		for(double[] row:graph)
@@ -78,7 +81,6 @@ class Application extends website
 			String query2="SELECT MIN(sno) AS min FROM station";
 			ResultSet result1=q.executeQuery(query1);
 			ResultSet result2=q1.executeQuery(query2);
-			int min=0;
 			if(result2.next())
 				min=result2.getInt(1);
 			while(result1.next())
@@ -122,17 +124,22 @@ class Application extends website
 			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/project1?autoReconnect=true&useSSL=false",user,pwd);
 			Statement q1=con.createStatement();
 			Statement q2=con.createStatement();
-			String query1="SELECT sno FROM station WHERE scode='"+src+"'";
-			String query2="SELECT sno FROM station WHERE scode='"+dest+"'";
+			String query1="SELECT * FROM station WHERE scode='"+src+"'";
+			String query2="SELECT * FROM station WHERE scode='"+dest+"'";
 			ResultSet result1=q1.executeQuery(query1);
 			ResultSet result2=q2.executeQuery(query2);
-			root=result1.getInt("sno");
-			leaf=result2.getInt("sno");
+			if(result1.next() && result2.next())
+			{
+				root=result1.getInt("sno");
+				leaf=result2.getInt("sno");
+			}
 		}
 		catch(Exception e)
 		{
 			e.printStackTrace();
 		}
+		root-=min;leaf-=min;
+
 		dist[root]=0.0;
 		int[] parents=new int[v];
 		parents[root]=-1;
@@ -301,35 +308,7 @@ class ViewT extends website
 		int a=n;
 		return a;
 	}
-/*	
-	String[] view()
-	{
-		String[] td=new String[n];
-		try
-		{
-			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/project1?autoReconnect=true&useSSL=false",user,pwd);
-			Statement q=con.createStatement();
-			String query1="SELECT * FROM track";
-			ResultSet result1=q.executeQuery(query1);
-			int i=0;
-			while(result1.next())
-			{
-				String src=result1.getString("src");
-				String dest=result1.getString("dest");
-				String d=String.valueOf(result1.getDouble("distance"));
-				td[i]=src;
-				td[i+1]=dest;
-				td[i+2]=d;
-				i+=3;
-			}
-		}
-		catch(Exception e)
-		{
-			System.out.println("No tracks available");
-		}
-		return td;
-	}
-	*/
+	
 	String [][] view()
 	{
 		String [][] td = new String[n][3];

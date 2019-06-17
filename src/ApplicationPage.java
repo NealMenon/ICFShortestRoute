@@ -119,7 +119,7 @@ public class ApplicationPage {
 			public void actionPerformed(ActionEvent e) {
 				ViewAllStations viewAllStationsObj = new ViewAllStations();
 				frame.setVisible(false);
-				viewAllStationsObj.frame.setVisible(true);
+				viewAllStationsObj.f.setVisible(true);
 			}
 		});
 		btnViewAllStation.setBounds(207, 314, 151, 29);
@@ -130,7 +130,7 @@ public class ApplicationPage {
 			public void actionPerformed(ActionEvent e) {
 				ViewAllTracks viewAllTracksObj = new ViewAllTracks();
 				frame.setVisible(false);
-				viewAllTracksObj.frame.setVisible(true);
+				viewAllTracksObj.f.setVisible(true);
 			}
 		});
 		btnViewAllTracks.setBounds(207, 355, 151, 29);

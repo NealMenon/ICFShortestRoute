@@ -1,83 +1,56 @@
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import java.awt.FlowLayout;
 import javax.swing.JButton;
+import java.awt.CardLayout;
+/*import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.layout.RowSpec;*/
 import javax.swing.JLabel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 import java.awt.event.ActionEvent;
+import javax.swing.*;
+
+
 
 public class ViewAllTracks {
-
-	public static JFrame frame;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ViewAllTracks window = new ViewAllTracks();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the application.
-	 */
-	public ViewAllTracks() {
-		initialize();
-	}
-
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	private void initialize() {
-		ViewT vwT = new ViewT();
-		int n =vwT.countTrack();
-		
-		String[][] vtrack = new String [n][3];
-		vtrack = vwT.view();
-		
-		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
-		
-		String data[][];
-	    data= vtrack;
-	    
-	    String column[]={"Source","Destination", "Distance"};         
-
-		JTable jt=new JTable(data,column);    
-		jt.setBounds(30,40,200,300);          
-		JScrollPane sp=new JScrollPane(jt);    
+	
+	public static JFrame f;
+	public  ViewAllTracks() {
+		{
+			ViewT vw=new ViewT();
+			//System.out.println(vw.countStation());
+			int n =vw.countTrack();
+			String[][] cmon = new String [n][3];
+			cmon = vw.view();     
+		    f=new JFrame();    
+		    String data[][];
+		   // for(int i = 0; i<n;i++)    
+		    String column[]={"source","destination","distance"};         
+		    f.getContentPane().setLayout(null);
+		    JTable jt=new JTable(cmon,column);    
+		    jt.setBounds(30,40,200,300);          
+		    JScrollPane sp=new JScrollPane(jt);
+		    sp.setBounds(81, 51, 376, 247);
+		    f.getContentPane().add(sp);
 		    
-		frame.add(sp);          	    
-		frame.setSize(300,400);    		    
-		frame.setVisible(true);
-		
-		JButton btnBack = new JButton("Back");
-		btnBack.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				//ApplicationPage applicationPageObj = new ApplicationPage();
-				frame.dispose();
-				ApplicationPage.frame.setVisible(true);
-			}
-		});
-		btnBack.setBounds(171, 209, 117, 29);
-		frame.getContentPane().add(btnBack);
-		
-		JLabel lblAllTracksIn = new JLabel("All tracks in the network are as follows");
-		lblAllTracksIn.setBounds(104, 24, 271, 16);
-		frame.getContentPane().add(lblAllTracksIn);
-	}
-
+		    JLabel lblAllStationsAre = new JLabel("All Tracks are as follows");
+		    lblAllStationsAre.setBounds(175, 23, 225, 16);
+		    f.getContentPane().add(lblAllStationsAre);
+		    
+		    JButton btnNewButton = new JButton("Back");
+		    btnNewButton.addActionListener(new ActionListener() {
+		    	public void actionPerformed(ActionEvent e) {
+		    		f.dispose();
+					ApplicationPage.frame.setVisible(true);
+		    	}
+		    });
+		    btnNewButton.setBounds(212, 325, 117, 29);
+		    f.getContentPane().add(btnNewButton);
+		    f.setSize(625,400);    
+		    f.setVisible(true);    
+		}     
+    }
 }
