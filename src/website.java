@@ -202,18 +202,34 @@ class ViewS extends website
 				int i=0; //j = 0;
 				while(result1.next())
 				{
+<<<<<<< HEAD
 					String sname=result1.getString("sname");
 					String scode = result1.getString("scode");	
 					String szone=result1.getString("szone");
 					sd[i][0]=sname;
 					sd[i][1]=scode;
 					sd[i][3]=szone;
+=======
+
+					String sname=result1.getString("sname");
+					String scode = result1.getString("scode");	
+					String szone=result1.getString("szone");
+
+					sd[i][0]=sname;
+					sd[i][1]=scode;
+					sd[i][3]=szone;
+
+>>>>>>> ca87933794fdbf48c468d4a34be777048dcedf7e
 					i++;
 				}
 			}
 			catch(Exception e)
 				{
+<<<<<<< HEAD
 					System.out.println("No stations available");
+=======
+				System.out.println("No stations available");
+>>>>>>> ca87933794fdbf48c468d4a34be777048dcedf7e
 				}
 			return sd;
 		}
@@ -241,6 +257,7 @@ class ViewT extends website
 		int a=n;
 		return a;
 	}
+/*	
 	String[] view()
 	{
 		String[] td=new String[n];
@@ -265,6 +282,36 @@ class ViewT extends website
 		catch(Exception e)
 		{
 			System.out.println("No tracks available");
+		}
+		return td;
+	}
+	*/
+	String [][] view()
+	{
+		String [][] td = new String[n][3];
+		try
+		{
+			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/project1?autoReconnect=true&useSSL=false",user,pwd);
+			Statement q=con.createStatement();
+			String query1="SELECT * FROM track";
+			ResultSet result1=q.executeQuery(query1);
+			int i=0;
+			while(result1.next())
+			{
+				String src=result1.getString("src");
+				String dest=result1.getString("dest");
+				String d=String.valueOf(result1.getDouble("distance"));
+				
+				td[i][0]=src;
+				td[i][1]=dest;
+				td[i][2]=d;
+				
+				i++;
+			}
+		}
+		catch(Exception e)
+		{
+			System.out.println("No stations available");
 		}
 		return td;
 	}
