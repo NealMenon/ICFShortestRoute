@@ -26,7 +26,6 @@ public class ViewAllStations {
 			String[][] cmon = new String [n][3];
 			cmon = vw.view();     
 		    f=new JFrame();    
-		    String data[][];
 		   // for(int i = 0; i<n;i++)   
 		    String column[]={"name","code","zone"};         
 		    f.getContentPane().setLayout(null);

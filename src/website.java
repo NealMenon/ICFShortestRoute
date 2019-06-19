@@ -38,29 +38,24 @@ public class website
 {
 	String user="root";
 	String pwd="Orion@1234";
+	int nbp;// nbp->number of breakpoints
 	public static void main(String[] args)
 	{
 		System.out.println("Hello World");
 	}
 }
 
-/*for application page and journey page.
+/*For application page and journey page.
 	The constructor is for taking values from the application page while journey function is for calculating the shortest path between 2 stations with or without breakpoints. The default tolerance is set at 10%. the shortest path is always printed first and then the ones with breakpoints.If user given path exceeds the tolerance limit then "invalid path" is printed.The tolerance is compared against the shortest path without breakpoints. 
 */
 class Application extends website
 {
-	String src,dest;
-	int t,nbp;//t->tolerance nbp->number of breakpoints
-	String[] bp=new String[nbp];
-	Application(String src,String dest,int t,int nbp,String[] bp)
+	String[] path=new String[nbp+2];
+	Application(int nbp,String[] path)
 	{
-		this.src=src;
-		this.dest=dest;
-		this.t=t;
 		this.nbp=nbp;
-		this.bp=bp;
+		this.path=path;
 	}
-
 
 	ViewS run=new ViewS();
 	int v=run.countStation();
@@ -110,14 +105,14 @@ class Application extends website
 			e.printStackTrace();
 		}
 	}
-
-	void journey()
+	
+	double journey(String src,String dest)
 	{
 		matrix();
-		double[] dist=new double[v];
+		double[] sd=new double[v];
 		boolean[] added=new boolean[v];
 		Arrays.fill(added,false);
-		Arrays.fill(dist,Double.MAX_VALUE);
+		Arrays.fill(sd,Double.MAX_VALUE);
 		int root=0,leaf=0;
 		try
 		{
@@ -132,52 +127,61 @@ class Application extends website
 			{
 				root=result1.getInt("sno");
 				leaf=result2.getInt("sno");
-			}
+			}			
 		}
 		catch(Exception e)
 		{
 			e.printStackTrace();
 		}
 		root-=min;leaf-=min;
-
-		dist[root]=0.0;
+		sd[root]=0.0;
 		int[] parents=new int[v];
 		parents[root]=-1;
-
-
-		for(int i=0;i<v;i++)
+		for(int i=1;i<v;i++)
 		{
 			int nv=-1;
-			double sd=Double.MAX_VALUE;
+			double dist=Double.MAX_VALUE;
 			for(int vi=0;vi<v;vi++)
 			{
-				if(!added[vi] && dist[vi]<sd)
+				if(!added[vi] && sd[vi]<dist)
 				{
 					nv=vi;
-					sd=dist[vi];
+					dist=sd[vi];
 				}
 			}
 			added[nv]=true;
 			for(int vi=0;vi<v;vi++)
 			{
-				double distance=graph[nv][vi];
-				if(distance>0 && ((sd+distance)<dist[vi]))
+				double edgedist=graph[nv][vi];
+				if(edgedist >0 && ((dist+edgedist)<sd[vi]))
 				{
 					parents[vi]=nv;
-					dist[vi]=sd+distance;
+					sd[vi]=dist+edgedist;
 				}
 			}
-			printsolution(nv,parents);
+		}
+		printSolution(root,leaf,sd,parents);
+		System.out.println();
+		return sd[leaf];
+	}
+	void printSolution(int root,int leaf,double[] distance,int[] parents)
+	{
+		if(leaf!=root)
+		{
+			System.out.print(root+"->");
+			System.out.print(leaf+"\t\t");
+			System.out.print(distance[leaf]+"\t\t");
+			printPath(leaf,parents);
 		}
 	}
-	void printsolution(int cv,int[] parents)
+	void printPath(int cv,int[] parents)
 	{
 		if(cv==-1)
 		{
 			return;
 		}
-		printsolution(parents[cv],parents);
-		System.out.println(cv+" ");
+		printPath(parents[cv],parents);
+		System.out.print(cv+" ");
 	}
 }
 
@@ -308,7 +312,7 @@ class ViewT extends website
 		int a=n;
 		return a;
 	}
-	
+
 	String [][] view()
 	{
 		String [][] td = new String[n][3];

@@ -11,6 +11,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JSpinner;
+import javax.swing.JOptionPane;
 
 public class ApplicationPage {
 
@@ -61,34 +62,34 @@ public class ApplicationPage {
 		frame.getContentPane().setLayout(null);
 		
 		sourcefield = new JTextField();
-		sourcefield.setBounds(105, 55, 185, 26);
+		sourcefield.setBounds(99, 40, 185, 26);
 		frame.getContentPane().add(sourcefield);
 		sourcefield.setColumns(10);
 		
 		destfield = new JTextField();
 		destfield.setColumns(10);
-		destfield.setBounds(302, 55, 185, 26);
+		destfield.setBounds(319, 40, 185, 26);
 		frame.getContentPane().add(destfield);
 		
 		JLabel lblSourceStationCode = new JLabel("Source Station Code");
-		lblSourceStationCode.setBounds(105, 34, 126, 16);
+		lblSourceStationCode.setBounds(105, 12, 164, 16);
 		frame.getContentPane().add(lblSourceStationCode);
 		
 		lblDestinationStationCode = new JLabel("Destination Station Code");
-		lblDestinationStationCode.setBounds(302, 34, 168, 16);
+		lblDestinationStationCode.setBounds(319, 12, 185, 16);
 		frame.getContentPane().add(lblDestinationStationCode);
 		
 		JLabel lblNumberOfBreak = new JLabel("Number of Break points");
-		lblNumberOfBreak.setBounds(85, 114, 164, 16);
+		lblNumberOfBreak.setBounds(90, 130, 164, 16);
 		frame.getContentPane().add(lblNumberOfBreak);
 		
 		tolerance = new JTextField();
-		tolerance.setBounds(357, 109, 130, 26);
+		tolerance.setBounds(228, 78, 130, 26);
 		frame.getContentPane().add(tolerance);
 		tolerance.setColumns(10);
 		
 		lblTolerance = new JLabel("Tolerance");
-		lblTolerance.setBounds(357, 93, 84, 16);
+		lblTolerance.setBounds(147, 81, 84, 16);
 		frame.getContentPane().add(lblTolerance);
 		
 		
@@ -139,63 +140,63 @@ public class ApplicationPage {
 		
 		SpinnerModel sm = new SpinnerNumberModel(0, 0, 5, 1); //default value,lower bound,upper bound,increment by
 		JSpinner spinner = new JSpinner(sm);
-		spinner.setBounds(243, 109, 41, 26);
+		spinner.setBounds(260, 126, 41, 26);
 		frame.getContentPane().add(spinner);
 //		int numBreakPoints = (Integer) spinner.getValue();
 		
 		
 		breakpoint1 = new JTextField();
 		breakpoint1.setEditable(false);
-		breakpoint1.setBounds(105, 167, 130, 26);
+		breakpoint1.setBounds(105, 186, 130, 26);
 		frame.getContentPane().add(breakpoint1);
 		breakpoint1.setColumns(10);
 		
 		JLabel lblBreakStationCodes = new JLabel("Break Station Codes: ");
-		lblBreakStationCodes.setBounds(105, 149, 142, 16);
+		lblBreakStationCodes.setBounds(107, 158, 142, 16);
 		frame.getContentPane().add(lblBreakStationCodes);
 		
 		breakpoint2 = new JTextField();
 		breakpoint2.setEditable(false);
-		breakpoint2.setBounds(105, 199, 130, 26);
+		breakpoint2.setBounds(105, 224, 130, 26);
 		frame.getContentPane().add(breakpoint2);
 		breakpoint2.setColumns(10);
 		
 		breakpoint3 = new JTextField();
 		breakpoint3.setEditable(false);
-		breakpoint3.setBounds(105, 237, 130, 26);
+		breakpoint3.setBounds(105, 262, 130, 26);
 		frame.getContentPane().add(breakpoint3);
 		breakpoint3.setColumns(10);
 		
 		breakpoint4 = new JTextField();
 		breakpoint4.setEditable(false);
-		breakpoint4.setBounds(279, 167, 130, 26);
+		breakpoint4.setBounds(289, 186, 130, 26);
 		frame.getContentPane().add(breakpoint4);
 		breakpoint4.setColumns(10);
 		
 		breakpoint5 = new JTextField();
 		breakpoint5.setEditable(false);
-		breakpoint5.setBounds(279, 199, 130, 26);
+		breakpoint5.setBounds(289, 224, 130, 26);
 		frame.getContentPane().add(breakpoint5);
 		breakpoint5.setColumns(10);
 		
 		JLabel label = new JLabel("1:");
-		label.setBounds(90, 172, 61, 16);
+		label.setBounds(90, 186, 61, 16);
 		frame.getContentPane().add(label);
 		
 		JLabel label_1 = new JLabel("2:");
-		label_1.setBounds(90, 205, 61, 16);
+		label_1.setBounds(90, 224, 61, 16);
 		frame.getContentPane().add(label_1);
 		
 		JLabel label_2 = new JLabel("3:");
-		label_2.setBounds(90, 242, 61, 16);
+		label_2.setBounds(90, 262, 61, 16);
 		frame.getContentPane().add(label_2);
 		
 		JLabel label_3 = new JLabel("4:");
-		label_3.setBounds(261, 172, 61, 16);
+		label_3.setBounds(271, 186, 61, 16);
 		frame.getContentPane().add(label_3);
 		
 		JLabel label_4 = new JLabel("5:");
-		label_4.setBounds(261, 204, 61, 16);
+		label_4.setBounds(271, 224, 61, 16);
 		frame.getContentPane().add(label_4);
 		
 		JButton btnAdd = new JButton("Add");
@@ -237,7 +238,7 @@ public class ApplicationPage {
 				}
 			}
 		});
-		btnAdd.setBounds(276, 110, 56, 26);
+		btnAdd.setBounds(313, 125, 90, 26);
 		frame.getContentPane().add(btnAdd);
 
 
@@ -247,9 +248,9 @@ public class ApplicationPage {
 				try {
 				    spinner.commitEdit();
 				} catch ( java.text.ParseException ex ) { System.out.println("Something went wrng heere\n"); }
-				int numBreakPoints = (Integer) spinner.getValue();
-				String[] bp=new String[numBreakPoints];
-				switch(numBreakPoints) {
+				int nbp = (Integer) spinner.getValue();
+				String[] path=new String[nbp+2];
+				switch(nbp) {
 				case 0:
 					breakpoint1.setEditable(false);
 					breakpoint1.setText("");
@@ -267,31 +268,43 @@ public class ApplicationPage {
 					breakpoint5.setText("");
 					break;
 				}
-				switch(numBreakPoints) {
+				switch(nbp) {
 				case 5:
 					breakpoint5.setEditable(true);
-					bp[4]=breakpoint5.getText();
+					path[5]=breakpoint5.getText();
 				case 4:
 					breakpoint4.setEditable(true);
-					bp[3]=breakpoint4.getText();
+					path[4]=breakpoint4.getText();
 				case 3:
 					breakpoint3.setEditable(true);
-					bp[2]=breakpoint3.getText();
+					path[3]=breakpoint3.getText();
 				case 2:
 					breakpoint2.setEditable(true);
-					bp[1]=breakpoint2.getText();
+					path[2]=breakpoint2.getText();
 				case 1:
 					breakpoint1.setEditable(true);
-					bp[0]=breakpoint1.getText();
+					path[1]=breakpoint1.getText();
 				}
 				t=Integer.parseInt(tolerance.getText());
 				dest=destfield.getText();
 				src=sourcefield.getText();
-				JourneyPage journeyObj = new JourneyPage();
-				frame.setVisible(false);
-				journeyObj.frame.setVisible(true);
-				Application app=new Application(src,dest,t,numBreakPoints,bp);
-				app.journey();
+				path[0]=src;path[nbp+1]=dest;
+				Application app=new Application(nbp,path);
+				double sd=app.journey(path[0],path[nbp+1]);
+				double dist=0;
+				for(int i=0;i<nbp+1;i++)
+				{
+					dist+=app.journey(path[i],path[i+1]);
+				}
+				double exceed=sd*(100+t)/100;
+				if(dist>exceed)
+					JOptionPane.showMessageDialog(null,"Route exceeded tolerance limit.Please choose different breakpoints","ALERT MESSAGE",JOptionPane.WARNING_MESSAGE);
+				else
+				{
+					JourneyPage journeyObj = new JourneyPage();
+					frame.setVisible(false);
+					journeyObj.frame.setVisible(true);
+				}
 			}
 		});
 		btnFindJourneyLength.setBounds(371, 314, 151, 70);
