@@ -15,7 +15,7 @@ import javax.swing.JOptionPane;
 
 public class ApplicationPage {
 
-	public JFrame frame;
+	public static JFrame frame;
 	private JTextField sourcefield;
 	private JTextField destfield;
 	private JLabel lblDestinationStationCode;
@@ -26,7 +26,7 @@ public class ApplicationPage {
 	private JTextField breakpoint3;
 	private JTextField breakpoint4;
 	private JTextField breakpoint5;
-	String src,dest;
+	String src,dest,route="";
 	int t;
 
 	/**
@@ -290,6 +290,7 @@ public class ApplicationPage {
 				src=sourcefield.getText();
 				path[0]=src;path[nbp+1]=dest;
 				Application app=new Application(nbp,path);
+				JourneyPage journeyObj = new JourneyPage();
 				double sd=app.journey(path[0],path[nbp+1]);
 				double dist=0;
 				for(int i=0;i<nbp+1;i++)
@@ -298,13 +299,13 @@ public class ApplicationPage {
 				}
 				double exceed=sd*(100+t)/100;
 				if(dist>exceed)
-					JOptionPane.showMessageDialog(null,"Route exceeded tolerance limit.Please choose different breakpoints","ALERT MESSAGE",JOptionPane.WARNING_MESSAGE);
+					JOptionPane.showMessageDialog(null,"Route exceeded tolerance limit. Please choose different breakpoints","ALERT MESSAGE",JOptionPane.WARNING_MESSAGE);
 				else
 				{
-					JourneyPage journeyObj = new JourneyPage();
 					frame.setVisible(false);
 					journeyObj.frame.setVisible(true);
 					journeyObj.setDist(dist);
+					journeyObj.setPath(app.printRoute());
 				}
 			}
 		});

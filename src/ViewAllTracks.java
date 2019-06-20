@@ -25,9 +25,7 @@ public class ViewAllTracks {
 			int n =vw.countTrack();
 			String[][] cmon = new String [n][3];
 			cmon = vw.view();     
-		    f=new JFrame();    
-		    String data[][];
-		   // for(int i = 0; i<n;i++)    
+		    f=new JFrame();        
 		    String column[]={"source","destination","distance"};         
 		    f.getContentPane().setLayout(null);
 		    JTable jt=new JTable(cmon,column);    
@@ -43,9 +41,9 @@ public class ViewAllTracks {
 		    JButton btnNewButton = new JButton("Back");
 		    btnNewButton.addActionListener(new ActionListener() {
 		    	public void actionPerformed(ActionEvent e) {
-		    		ApplicationPage applicationPageObj = new ApplicationPage();
+		    		//ApplicationPage applicationPageObj = new ApplicationPage();
 		    		f.dispose();
-					applicationPageObj.frame.setVisible(true);
+					ApplicationPage.frame.setVisible(true);
 		    	}
 		    });
 		    btnNewButton.setBounds(212, 325, 117, 29);

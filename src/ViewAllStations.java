@@ -42,9 +42,9 @@ public class ViewAllStations {
 		    JButton btnNewButton = new JButton("Back");
 		    btnNewButton.addActionListener(new ActionListener() {
 		    	public void actionPerformed(ActionEvent e) {
-		    		ApplicationPage applicationPageObj = new ApplicationPage();
+		    		//ApplicationPage applicationPageObj = new ApplicationPage();
 		    		f.dispose();
-					applicationPageObj.frame.setVisible(true);
+					ApplicationPage.frame.setVisible(true);
 		    	}
 		    });
 		    btnNewButton.setBounds(212, 325, 117, 29);

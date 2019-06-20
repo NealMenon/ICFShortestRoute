@@ -39,6 +39,8 @@ public class website
 	String user="root";
 	String pwd="Orion@1234";
 	int nbp;// nbp->number of breakpoints
+	String route="";
+	int flag=0;
 	public static void main(String[] args)
 	{
 		System.out.println("Hello World");
@@ -51,6 +53,7 @@ public class website
 class Application extends website
 {
 	String[] path=new String[nbp+2];
+	String a="";//for storing route via printPath()
 	Application(int nbp,String[] path)
 	{
 		this.nbp=nbp;
@@ -160,28 +163,60 @@ class Application extends website
 				}
 			}
 		}
-		printSolution(root,leaf,sd,parents);
+		route=printSolution(root,leaf,sd,parents);
 		System.out.println();
 		return sd[leaf];
 	}
-	void printSolution(int root,int leaf,double[] distance,int[] parents)
+	String printSolution(int root,int leaf,double[] distance,int[] parents)
 	{
+		String b="";
 		if(leaf!=root)
 		{
 			System.out.print(root+"->");
 			System.out.print(leaf+"\t\t");
-			System.out.print(distance[leaf]+"\t\t");
-			printPath(leaf,parents);
+			System.out.print(distance[leaf]+"\t");
+			if(flag>0)
+				b=printPath(leaf,parents);
+			flag++;
 		}
+		return b;
 	}
-	void printPath(int cv,int[] parents)
+	String printPath(int cv,int[] parents)
 	{
+
 		if(cv==-1)
 		{
-			return;
+			return "";
 		}
 		printPath(parents[cv],parents);
-		System.out.print(cv+" ");
+		if(flag%4==0)
+			a+="\n";
+		a+=" "+printName(cv);
+		//System.out.println(a+" "+printName(cv));
+		return a;
+	}
+	String printRoute()
+	{
+		return route;
+	}
+	String printName(int cv)
+	{
+		String b="";
+		try
+		{
+			int a=cv+min;
+			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/project1?autoReconnect=true&useSSL=false",user,pwd);
+			Statement q=con.createStatement();
+			String query1="SELECT * FROM station WHERE sno='"+a+"'";
+			ResultSet result1=q.executeQuery(query1);
+			if(result1.next())
+				b+=" "+result1.getString("scode");
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		return b;
 	}
 }
 

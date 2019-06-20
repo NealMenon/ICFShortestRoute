@@ -90,9 +90,9 @@ public class AddStation {
 //				System.out.println("Back");
 //			}
 			public void actionPerformed(ActionEvent e) {
-				ApplicationPage applicationPageObj = new ApplicationPage();
+				//ApplicationPage applicationPageObj = new ApplicationPage();
 				frame.dispose();
-				applicationPageObj.frame.setVisible(true);
+				ApplicationPage.frame.setVisible(true);
 			}
 		});
 		btnhome.setBounds(284, 276, 148, 25);

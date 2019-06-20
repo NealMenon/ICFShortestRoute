@@ -98,9 +98,9 @@ public class AddTrack {
 //				System.out.println("Back");
 //			}
 			public void actionPerformed(ActionEvent e) {
-				ApplicationPage applicationPageObj = new ApplicationPage();
+				//ApplicationPage applicationPageObj = new ApplicationPage();
 				frame.dispose();
-				applicationPageObj.frame.setVisible(true);
+				ApplicationPage.frame.setVisible(true);
 			}
 		});
 		btnBackToMain.setBounds(290, 227, 162, 25);

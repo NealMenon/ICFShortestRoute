@@ -9,12 +9,15 @@ import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.JScrollPane;
 
 public class JourneyPage {
 
 	public  JFrame frame;
 	public double distance;
 	private JTextField distfield;
+	String path="";
+	private JTextArea routefield1;
 
 	/**
 	 * Launch the application.
@@ -31,17 +34,22 @@ public class JourneyPage {
 			}
 		});
 	}
-
+	
+	void setDist(double dist)
+	{
+		System.out.println("C"+"\t"+dist);
+		distance=dist;
+		distfield.setText(String.valueOf(distance));
+	}
+	void setPath(String route)
+	{
+		routefield1.setText(route);
+	}
 	/**
 	 * Create the application.
 	 */
 	public JourneyPage() {
 		initialize();
-	}
-	void setDist(double dist)
-	{
-		distance=dist;
-		System.out.println("C"+"\t"+distance);
 	}
 	/**
 	 * Initialize the contents of the frame.
@@ -55,9 +63,9 @@ public class JourneyPage {
 		JButton btnBack = new JButton("Back");
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ApplicationPage applicationPageObj = new ApplicationPage();
+				//ApplicationPage applicationPageObj = new ApplicationPage();
 				frame.dispose();
-				applicationPageObj.frame.setVisible(true);
+				ApplicationPage.frame.setVisible(true);
 			}
 		});
 		btnBack.setBounds(172, 215, 117, 29);
@@ -69,14 +77,26 @@ public class JourneyPage {
 		
 		distfield = new JTextField();
 		distfield.setEditable(false);
-		distfield.setBounds(246, 181, 151, 19);
+		distfield.setBounds(172, 181, 225, 19);
 		frame.getContentPane().add(distfield);
 		distfield.setColumns(10);
-		distfield.setText(String.valueOf(distance));
-		System.out.println("Distance"+"\t"+distance);
+		//System.out.println("Distance"+"\t"+distance);
 		
 		JLabel lblTotalDistance = new JLabel("Total Distance");
 		lblTotalDistance.setBounds(63, 181, 128, 17);
 		frame.getContentPane().add(lblTotalDistance);
+		
+		JLabel lblRoute = new JLabel("Route");
+		lblRoute.setBounds(63, 104, 82, 15);
+		frame.getContentPane().add(lblRoute);
+		
+		JScrollPane routefield = new JScrollPane(routefield1);
+		routefield.setBounds(173, 93, 237, 51);
+		frame.getContentPane().add(routefield);
+		
+		routefield1 = new JTextArea();
+		routefield1.setEditable(false);
+		routefield.setViewportView(routefield1);
+		routefield1.setColumns(10);
 	}
 }
