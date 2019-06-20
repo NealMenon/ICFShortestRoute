@@ -16,7 +16,7 @@ import java.awt.event.ActionEvent;
 
 public class AddStation {
 
-	public static JFrame frame;
+	public  JFrame frame;
 	private JTextField namefield;
 	private JTextField codefield;
 	private JTextField zonefield;
@@ -90,9 +90,9 @@ public class AddStation {
 //				System.out.println("Back");
 //			}
 			public void actionPerformed(ActionEvent e) {
-				//ApplicationPage applicationPageObj = new ApplicationPage();
+				ApplicationPage applicationPageObj = new ApplicationPage();
 				frame.dispose();
-				ApplicationPage.frame.setVisible(true);
+				applicationPageObj.frame.setVisible(true);
 			}
 		});
 		btnhome.setBounds(284, 276, 148, 25);

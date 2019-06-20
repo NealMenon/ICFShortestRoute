@@ -13,7 +13,7 @@ import javax.swing.JLabel;
 
 public class AddTrack {
 
-	public static JFrame frame;
+	public JFrame frame;
 	private JTextField startfield;
 	private JTextField endfield;
 	private JTextField distancefield;
@@ -98,9 +98,9 @@ public class AddTrack {
 //				System.out.println("Back");
 //			}
 			public void actionPerformed(ActionEvent e) {
-//				applicationPageObj = new ApplicationPage();
+				ApplicationPage applicationPageObj = new ApplicationPage();
 				frame.dispose();
-				ApplicationPage.frame.setVisible(true);
+				applicationPageObj.frame.setVisible(true);
 			}
 		});
 		btnBackToMain.setBounds(290, 227, 162, 25);

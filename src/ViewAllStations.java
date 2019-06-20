@@ -17,7 +17,7 @@ import javax.swing.*;
 
 public class ViewAllStations {
 	
-	public static JFrame f;
+	public JFrame f;
 	public  ViewAllStations() {
 		{
 			ViewS vw=new ViewS();
@@ -42,8 +42,9 @@ public class ViewAllStations {
 		    JButton btnNewButton = new JButton("Back");
 		    btnNewButton.addActionListener(new ActionListener() {
 		    	public void actionPerformed(ActionEvent e) {
+		    		ApplicationPage applicationPageObj = new ApplicationPage();
 		    		f.dispose();
-					ApplicationPage.frame.setVisible(true);
+					applicationPageObj.frame.setVisible(true);
 		    	}
 		    });
 		    btnNewButton.setBounds(212, 325, 117, 29);

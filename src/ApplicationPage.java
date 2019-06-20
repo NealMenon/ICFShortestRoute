@@ -15,7 +15,7 @@ import javax.swing.JOptionPane;
 
 public class ApplicationPage {
 
-	public static JFrame frame;
+	public JFrame frame;
 	private JTextField sourcefield;
 	private JTextField destfield;
 	private JLabel lblDestinationStationCode;
@@ -304,6 +304,7 @@ public class ApplicationPage {
 					JourneyPage journeyObj = new JourneyPage();
 					frame.setVisible(false);
 					journeyObj.frame.setVisible(true);
+					journeyObj.setDist(dist);
 				}
 			}
 		});
