@@ -1,3 +1,6 @@
+/*
+   On this page all stations with their respective details are printed in a JTable.
+	*/
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -39,6 +42,7 @@ public class ViewAllStations {
 		    lblAllStationsAre.setBounds(175, 23, 225, 16);
 		    f.getContentPane().add(lblAllStationsAre);
 		    
+		    //links to Application page
 		    JButton btnNewButton = new JButton("Back");
 		    btnNewButton.addActionListener(new ActionListener() {
 		    	public void actionPerformed(ActionEvent e) {

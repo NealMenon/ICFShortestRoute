@@ -1,3 +1,7 @@
+/*
+  On this page the journey path is printed with a breakpoint being represented by the station code being printed twice.
+  the total distance is also printed.
+	*/
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -35,12 +39,15 @@ public class JourneyPage {
 		});
 	}
 	
+	//sets the distance to be displayed in the text field "distfield"
 	void setDist(double dist)
 	{
 		System.out.println("C"+"\t"+dist);
 		distance=dist;
 		distfield.setText(String.valueOf(distance));
 	}
+
+	//sets the route to be dispayed
 	void setPath(String route)
 	{
 		routefield1.setText(route);
@@ -60,6 +67,7 @@ public class JourneyPage {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
+		//links to Application page
 		JButton btnBack = new JButton("Back");
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -90,6 +98,7 @@ public class JourneyPage {
 		lblRoute.setBounds(63, 104, 82, 15);
 		frame.getContentPane().add(lblRoute);
 		
+		//prints route
 		JScrollPane routefield = new JScrollPane(routefield1);
 		routefield.setBounds(173, 93, 237, 51);
 		frame.getContentPane().add(routefield);

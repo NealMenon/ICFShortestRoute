@@ -1,3 +1,7 @@
+/*
+  On this page all the tracks are printed with thier respective source and destination stations along with distance
+  between the two.
+	*/
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -38,6 +42,7 @@ public class ViewAllTracks {
 		    lblAllStationsAre.setBounds(175, 23, 225, 16);
 		    f.getContentPane().add(lblAllStationsAre);
 		    
+		    //links to Application Page
 		    JButton btnNewButton = new JButton("Back");
 		    btnNewButton.addActionListener(new ActionListener() {
 		    	public void actionPerformed(ActionEvent e) {
