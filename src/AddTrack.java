@@ -1,3 +1,6 @@
+/*
+  This page represents the Add Track page where a new track can be added between any two stations as long as they are not same.
+	*/
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -76,6 +79,7 @@ public class AddTrack {
 		frame.getContentPane().add(distancefield);
 		distancefield.setColumns(10);
 		
+		//liks to AddT class of website.java
 		JButton btnAddTrack = new JButton("Add Track");
 		btnAddTrack.addActionListener(new ActionListener() {
 			@Override
@@ -90,6 +94,7 @@ public class AddTrack {
 		btnAddTrack.setBounds(93, 227, 114, 25);
 		frame.getContentPane().add(btnAddTrack);
 		
+		//links to Application Page
 		JButton btnBackToMain = new JButton("Back to Main Page");
 		btnBackToMain.addActionListener(new ActionListener() {
 			@Override

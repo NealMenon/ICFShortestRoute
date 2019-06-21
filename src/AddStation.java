@@ -1,3 +1,7 @@
+/*
+  On this page the user can enter a new station along with all its details which are station name,code and zone.	
+	*/
+
 import java.awt.EventQueue;
 import javax.swing.JFrame;
 import java.awt.FlowLayout;
@@ -70,6 +74,7 @@ public class AddStation {
 		zonefield.setBounds(234, 215, 269, 19);
 		frame.getContentPane().add(zonefield);
 		
+		//links to AddS class of website.java
 		JButton btnadd = new JButton("Add Station");
 		btnadd.addActionListener(new ActionListener() {
 			@Override
@@ -82,6 +87,7 @@ public class AddStation {
 		});
 		btnadd.setBounds(101, 276, 138, 25);
 		
+		//links to Application Page
 		JButton btnhome = new JButton("Back to Home");
 		btnhome.addActionListener(new ActionListener() {
 			@Override

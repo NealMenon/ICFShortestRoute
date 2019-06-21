@@ -39,7 +39,7 @@ public class website
 	String user="root";
 	String pwd="Orion@1234";
 	int nbp;// nbp->number of breakpoints
-	String route="";
+	String route="";//route->the shortest path possible between the source and destination stations 
 	int flag=0;
 	public static void main(String[] args)
 	{
@@ -52,7 +52,7 @@ public class website
 */
 class Application extends website
 {
-	String[] path=new String[nbp+2];
+	String[] path=new String[nbp+2];//for storing source and destination including any breakpoint(s)
 	String a="";//for storing route via printPath()
 	Application(int nbp,String[] path)
 	{
@@ -61,9 +61,12 @@ class Application extends website
 	}
 
 	ViewS run=new ViewS();
-	int v=run.countStation();
-	double[][] graph=new double[v][v];
-	int min=0;
+	int v=run.countStation();//v->no. of vertices->number of stations in databse.
+	double[][] graph=new double[v][v];//adjacency matrix
+	int min=0;//to fing minimum station serial number so as to start from zero
+
+	/*This method is for making the adjacency matrix of the graph.Wherever there is no route it is stored as zero otherwise the track distance is stored.This method is always called everytime a route is asked by the user.
+		*/
 	void matrix()
 	{
 		for(double[] row:graph)
@@ -98,7 +101,7 @@ class Application extends website
 						i=i-min;
 					if(j>v)
 						j=j-min;
-					graph[i][j]=d;
+					graph[i][j]=d;//for storing the track distance in graph matrix
 					graph[j][i]=d;
 				}
 			}
@@ -109,6 +112,9 @@ class Application extends website
 		}
 	}
 	
+	/*
+	   This method is the brain of the entire website.The algorithm used here is Dijkstra's algorithm.The shortest path between the source and destination station is returned. The source or destination can either be a breakpoint or starting and ending positions.
+		*/
 	double journey(String src,String dest)
 	{
 		matrix();
@@ -163,10 +169,14 @@ class Application extends website
 				}
 			}
 		}
-		route=printSolution(root,leaf,sd,parents);
+		route=printSolution(root,leaf,sd,parents);//Stores the route between root and leaf stations
 		System.out.println();
 		return sd[leaf];
 	}
+
+	/*
+		This method is used for printing the path between the two stations being considered in the "journey" method above and return a string represnting the path between the two stations.
+	*/
 	String printSolution(int root,int leaf,double[] distance,int[] parents)
 	{
 		String b="";
@@ -177,10 +187,14 @@ class Application extends website
 			System.out.print(distance[leaf]+"\t");
 			if(flag>0)
 				b=printPath(leaf,parents);
-			flag++;
+			flag=1;
+			//The flag variable is used so that the shortest path is not printed along with path required by the user.
 		}
 		return b;
 	}
+	/*
+		This method takes the leaf and using parents array gives the route between the root and leaf nodes.The method returns a String to which the station(s) taken are appended to it.
+	*/
 	String printPath(int cv,int[] parents)
 	{
 
@@ -189,16 +203,19 @@ class Application extends website
 			return "";
 		}
 		printPath(parents[cv],parents);
-		if(flag%4==0)
-			a+="\n";
 		a+=" "+printName(cv);
-		//System.out.println(a+" "+printName(cv));
 		return a;
 	}
+
+	//This method is passing the global route variable(String) to the frontend.
 	String printRoute()
 	{
 		return route;
 	}
+
+	/*
+		This method is called in printPath so that the code of the station can be obtained.
+	*/
 	String printName(int cv)
 	{
 		String b="";
@@ -220,7 +237,9 @@ class Application extends website
 	}
 }
 
-/*This class is linked to the AddStation page of frontend.The new station details are stored in the database project1 in table "station"*/
+/*
+	This class is linked to the AddStation page of frontend.The new station details are stored in the database project1 in table "station".
+*/
 class AddS extends website
 {
 	String sname,scode,szone;
@@ -247,7 +266,9 @@ class AddS extends website
 	}
 }
 
-/*This class is linked to the AddTrack page of frontend.The new track details are stored in the database project1 in 	table "track"*/
+/*
+	This class is linked to the AddTrack page of frontend.The new track details are stored in the database project1 in table "track".
+*/
 class AddT extends website
 {
 	String src,dest;
@@ -274,7 +295,9 @@ class AddT extends website
 	}
 }
 
-/*This class is linked to the ViewAllStations page of frontend.This class outputs all the stations present in table "station" in database project1*/
+/*
+	This class is linked to the ViewAllStations page of frontend.This class outputs all the stations present in table "station" in database project1.
+*/
 class ViewS extends website
 {
 	int n=0;
@@ -325,7 +348,9 @@ class ViewS extends website
 		}
 }
 
-/*This class is linked to ViewAllTracks page of frontend.This class outputs all the tracks present in table "track" in the database project1*/
+/*
+	This class is linked to ViewAllTracks page of frontend.This class outputs all the tracks present in table "track" in the database project1
+*/
 class ViewT extends website
 {
 	int n=0;

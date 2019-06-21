@@ -1,3 +1,7 @@
+/*
+	This page represents the main page of the application.On this page the user enters source,destinatio,number of breakpoints,breakpoint stations if any and the tolerance which when not specified is taken as 10%. All the other frontend pages are accessed from here with links back to this page.
+	*/
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -26,8 +30,8 @@ public class ApplicationPage {
 	private JTextField breakpoint3;
 	private JTextField breakpoint4;
 	private JTextField breakpoint5;
-	String src,dest,route="";
-	int t;
+	String src,dest,route="";//src->source;dest->destination;route->path taken by train
+	int t;//t->tolerance
 
 	/**
 	 * Launch the application.
@@ -92,7 +96,7 @@ public class ApplicationPage {
 		lblTolerance.setBounds(147, 81, 84, 16);
 		frame.getContentPane().add(lblTolerance);
 		
-		
+		//links to Add Station page
 		JButton btnAddNewStation = new JButton("Add new Station");
 		btnAddNewStation.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -104,6 +108,7 @@ public class ApplicationPage {
 		btnAddNewStation.setBounds(44, 314, 151, 29);
 		frame.getContentPane().add(btnAddNewStation);
 		
+		//links to Add Track page
 		JButton btnAddNewTrack = new JButton("Add new Track");
 		btnAddNewTrack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -115,6 +120,7 @@ public class ApplicationPage {
 		btnAddNewTrack.setBounds(44, 355, 151, 29);
 		frame.getContentPane().add(btnAddNewTrack);
 		
+		//links to View All Stations page
 		JButton btnViewAllStation = new JButton("View all Stations");
 		btnViewAllStation.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -126,6 +132,8 @@ public class ApplicationPage {
 		btnViewAllStation.setBounds(207, 314, 151, 29);
 		frame.getContentPane().add(btnViewAllStation);
 		
+
+		//links to View All Tracks page
 		JButton btnViewAllTracks = new JButton("View all Tracks");
 		btnViewAllTracks.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -199,6 +207,7 @@ public class ApplicationPage {
 		label_4.setBounds(271, 224, 61, 16);
 		frame.getContentPane().add(label_4);
 		
+		//to set breakpoints
 		JButton btnAdd = new JButton("Add");
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -241,7 +250,7 @@ public class ApplicationPage {
 		btnAdd.setBounds(313, 125, 90, 26);
 		frame.getContentPane().add(btnAdd);
 
-
+		//links to Journey Page which gives details for the path
 		JButton btnFindJourneyLength = new JButton("Find Journey Length");//Journey Page
 		btnFindJourneyLength.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -285,27 +294,30 @@ public class ApplicationPage {
 					breakpoint1.setEditable(true);
 					path[1]=breakpoint1.getText();
 				}
-				t=Integer.parseInt(tolerance.getText());
+				if(tolerance.getText().compareTo("")==0)
+					t=10;
+				else
+					t=Integer.parseInt(tolerance.getText());
 				dest=destfield.getText();
 				src=sourcefield.getText();
 				path[0]=src;path[nbp+1]=dest;
 				Application app=new Application(nbp,path);
 				JourneyPage journeyObj = new JourneyPage();
-				double sd=app.journey(path[0],path[nbp+1]);
+				double sd=app.journey(path[0],path[nbp+1]);//shortest path between source and destination without breakpoints
 				double dist=0;
 				for(int i=0;i<nbp+1;i++)
 				{
-					dist+=app.journey(path[i],path[i+1]);
+					dist+=app.journey(path[i],path[i+1]);//distance with breakpoints
 				}
 				double exceed=sd*(100+t)/100;
-				if(dist>exceed)
+				if(dist>exceed)//check if within tolerance limit
 					JOptionPane.showMessageDialog(null,"Route exceeded tolerance limit. Please choose different breakpoints","ALERT MESSAGE",JOptionPane.WARNING_MESSAGE);
 				else
 				{
 					frame.setVisible(false);
 					journeyObj.frame.setVisible(true);
-					journeyObj.setDist(dist);
-					journeyObj.setPath(app.printRoute());
+					journeyObj.setDist(dist);//sending total distance of route with breakpoints
+					journeyObj.setPath(app.printRoute());//sending path details
 				}
 			}
 		});
